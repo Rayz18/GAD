@@ -5,23 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="../learner/assets/common/css/LearnerNavBar.css">
-    <link rel="stylesheet" href="../learner/assets/css/Home.css">
+    <link rel="stylesheet" href="./learner/assets/common/css/LearnerNavBar.css">
+    <link rel="stylesheet" href="./learner/assets/css/Home.css">
 </head>
 
 <body>
-    <?php include '../learner/assets/common/LearnerNavBar.php'; ?>
+    <?php include './learner/assets/common/LearnerNavBar.php'; ?>
     <!-- Image Slider Section -->
     <div class="slider-container">
         <div class="slider">
             <div class="slide fade">
-                <img src="./assets/images/A.jpg" class="slider-image">
+                <img src="/GAD-1/learner/assets/images/A.jpg" class="slider-image">
             </div>
             <div class="slide fade">
-                <img src="./assets/images/B.jpg" class="slider-image">
+                <img src="/GAD-1/learner/assets/images/B.jpg" class="slider-image">
             </div>
             <div class="slide fade">
-                <img src="./assets/images/C.jpg" class="slider-image">
+                <img src="/GAD-1/learner/assets/images/C.jpg" class="slider-image">
             </div>
         </div>
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>

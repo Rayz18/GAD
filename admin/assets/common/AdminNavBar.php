@@ -48,7 +48,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
         </ul>
 
         <!-- Logout Button -->
-        <a href="admin_logout.php" class="logout">Logout</a>
+        <a href="admin_logout.php" class="logout" onclick="confirmLogout()">Logout</a>
     </div>
 
     <!-- Sidebar Toggle Button -->
@@ -65,6 +65,12 @@ if (!isset($_SESSION['admin_logged_in'])) {
             document.getElementById("sidebar").classList.toggle("expanded");
             document.getElementById("content").classList.toggle("shifted");
         });
+
+        function confirmLogout() {
+            if (confirm("Are you sure you want to logout?")) {
+                window.location.href = "admin_logout.php";
+            }
+        }
     </script>
 </body>
 

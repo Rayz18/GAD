@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../admin/assets/css/admin_login.css">
 </head>
+
 <body>
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="row justify-content-between align-items-center w-100">
@@ -43,7 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <img src="../learner/assets/images/BSU.png" alt="University Logo" class="logo mr-2">
                     <img src="../learner/assets/images/GAD.png" alt="Department Logo" class="logo">
                 </div>
-                <h1 class="text-white display-4 font-weight-bold quote-text">Empowering Equality, Advancing Development</h1>
+                <h1 class="text-white display-4 font-weight-bold quote-text">Empowering Equality, Advancing Development
+                </h1>
             </div>
 
             <!-- Login Form Section (Right) -->
@@ -53,12 +56,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <?php if (!empty($error_message)): ?>
                         <p class="text-danger text-center"><?= htmlspecialchars($error_message) ?></p>
                     <?php endif; ?>
-                    <form action="admin_login.php" method="POST" class="d-flex flex-column justify-content-between h-100">
+                    <form action="admin_login.php" method="POST"
+                        class="d-flex flex-column justify-content-between h-100">
                         <div class="form-group">
-                            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required>
+                            <input type="text" id="username" name="username" class="form-control" placeholder="Username"
+                                required>
                         </div>
                         <div class="form-group mb-4">
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                            <input type="password" id="password" name="password" class="form-control"
+                                placeholder="Password" required>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block mt-auto">Login</button>
                     </form>
@@ -67,4 +73,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
 </body>
+
 </html>

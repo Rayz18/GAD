@@ -9,6 +9,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,6 +21,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
     <script src="../admin/assets/common/js/dashboard_charts.js" defer></script>
     <link rel="stylesheet" href="../admin/assets/css/admin_dashboard.css">
 </head>
+
 <body>
     <div class="dashboard-wrapper">
         <?php include '../admin/assets/common/AdminNavBar.php'; ?>
@@ -39,4 +41,5 @@ if (!isset($_SESSION['admin_logged_in'])) {
     </div>
     <script src="../admin/assets/common/js/sidebarToggle.js"></script>
 </body>
+
 </html>

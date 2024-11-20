@@ -58,7 +58,7 @@ $program = $program_query->fetch_assoc();
 
         // Loop through each course and display it
         while ($course = $query->fetch_array()) {
-        ?>
+            ?>
             <div class="course-card">
                 <div class="course-image">
                     <img src="../staff/upload/<?php echo $course['course_img']; ?>"
