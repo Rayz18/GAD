@@ -4,186 +4,190 @@ body {
     background-color: #f5f5f5; /* Light background */
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     min-height: 100vh;
-    overflow: hidden;
 }
 
-/* Full-width navigation bar */
-.navbar {
-    width: 100vw;
-    background-color: #B19CD9; /* Light purple */
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    box-sizing: border-box;
-}
-
-/* Logo and Name on the left */
-.navbar .logo {
-    font-size: 24px;
+/* Heading style */
+.col-lg-9.col-md-8 {
+    color: #9373b9 !important; /* Bootstrap primary color */
+    font-size: 3.5rem;
     font-weight: bold;
-    color: white;
-    text-decoration: none;
-}
-
-/* Hover effect for the logo */
-.navbar .logo:hover {
-    color: #ddd;
-}
-
-/* Navigation links */
-.navbar .nav-links {
-    display: flex;
-    gap: 15px;
-}
-
-.navbar .nav-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-}
-
-.navbar .nav-links a:hover {
-    color: #ddd;
-}
-
-/* Logout button styling */
-.navbar .logout {
-    background-color: #C96A6A; /* Red */
-    padding: 8px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    color: white;
-    font-size: 14px;
-}
-
-.navbar .logout:hover {
-    background-color: #d32f2f; /* Darker red */
-}
-
-/* Style for the header */
-h1 {
-    color: #B19CD9; /* Green */
-    margin-top: 30px;
-    font-size: 2.5rem;
     text-align: center;
-    margin-left: 25px;
-}
-
-/* Container for the form */
-.form-container {
-    max-width: 600px;
-    width: 100%;
-    background-color: #fff;
+    margin-bottom: 20px;
+    margin: 0 auto;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 110px !important; /* Adjust this value to move the form lower */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+}
+
+h1 {
+    font-size: 2.8rem;
+    font-weight: 600 !important; /* Make the text bolder */
     text-align: center;
 }
 
-/* Success and error messages */
-.success-message, .error-message {
+/* Alert messages (Overlay Style) */
+.alert {
+    display: inline-block;
+    position: absolute; /* Position the message absolutely */
+    top: 80px; /* Position relative to the container */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+    z-index: 100; /* Ensure it overlays above other elements */
     font-size: 1rem;
-    position: fixed; /* Keeps it fixed within the viewport */
-    top: 85px; /* Position it at the bottom of the viewport */
-    left: 50%;
-    transform: translateX(-50%); /* Center horizontally */
-    padding: 10px 20px;
+    padding: 5px 10px;
     border-radius: 5px;
-    z-index: 10; /* Ensure it stays above other elements */
-    opacity: 1; /* Set initial opacity */
-    transition: opacity 0.3s ease; /* Smooth fade-out effect */
+    text-align: center;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
-.success-message {
-    color: #28a745; /* Green */
+/* Success message styling */
+.alert-success {
+    background-color: #e6f9ec; /* Light green background */
+    color: #28a745; /* Green text */
 }
 
-.error-message {
-    color: #dc3545; /* Red */
+/* Error message styling */
+.alert-danger {
+    background-color: #fdecea; /* Light red background */
+    color: #dc3545; /* Red text */
 }
 
-.course-form {
-    margin-top: 20px !important;
+/* Adjust form styling for spacing */
+form {
+    margin-top: 50px; /* Add space between messages and form */
 }
 
-/* Textarea styling */
-textarea {
-    width: 100%;
-    height: 250px;
-    padding: 15px;
-    font-size: 1rem;
-    font-family: Arial, sans-serif;
-    border: 2px solid #B19CD9; /* Light purple border */
-    border-radius: 5px;
-    resize: none;
-    margin-bottom: 10px;
-    margin-top: 30px;
+textarea.form-control.border-3 {
+    border: 2px solid #9e3de3; /* Dark Purple */
+    border-radius: 8px; /* Smooth rounded corners */
+    padding: 12px; /* Add spacing inside the textarea */
+    box-shadow: none; /* Remove any additional shadow if undesired */
+    background-color: #ffffff; /* Ensure a clean white background */
+    color: #333; /* Neutral text color */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
 }
 
-textarea:focus {
-    outline: none;
-    border-color: #A877B3; /* Slightly darker purple on focus */
+textarea.form-control.border-3:focus {
+    border-color: #c786f6; /* Slightly lighter purple on focus */
+    box-shadow: 0 0 10px rgba(75, 0, 130, 0.4); /* Add a subtle glow on focus */
 }
 
-/* Button styling */
+/* Button container */
+.d-flex.justify-content-end.gap-2 {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Buttons */
 button {
-    background-color: #C96A6A; /* Button color for Save and Back */
-    color: white;
     font-size: 1rem;
     padding: 10px 20px;
+    border-radius: 5px;
     border: none;
+    transition: background-color 0.3s, transform 0.2s;
+    cursor: pointer;
+}
+
+button.btn-primary {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+button.btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+button.btn-secondary {
+    background-color: #6c757d;
+    color: #ffffff;
+}
+
+button.btn-secondary:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+/* Sidebar Styling */
+.sidebar {
+    background-color: #ffffff;
+    border-right: 1px solid #dee2e6;
+    min-height: 100vh;
+    width: 250px; /* Default expanded width */
+    transition: width 0.3s ease; /* Smooth transition */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    overflow: hidden; /* Hide overflowing content when collapsed */
+}
+
+/* Collapsed sidebar */
+.sidebar.collapsed {
+    width: 50px; /* Width when collapsed */
+}
+
+/* Content Area */
+.content {
+    margin-left: 250px; /* Default margin to align with the full sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition */
+    padding: 20px;
+}
+
+/* Content when sidebar is collapsed */
+.sidebar.collapsed ~ .content {
+    margin-left: 50px; /* Adjust margin for collapsed sidebar */
+}
+
+/* Sidebar toggle button */
+#toggle-sidebar {
+    position: absolute;
+    top: 10px;
+    left: 10px; /* Position it within the sidebar */
+    z-index: 200; /* Ensure it's above everything */
+    background-color: #6c757d;
+    color: #ffffff;
+    border: none;
+    padding: 8px 10px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.1s;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color:  #a84545;
-    transform: scale(1.05);
+/* Hover effect for toggle button */
+#toggle-sidebar:hover {
+    background-color: #5a6268;
 }
 
-button:active {
-    transform: scale(0.95);
+/* Sidebar content visibility */
+.sidebar.collapsed .sidebar-content {
+    display: none; /* Hide content when collapsed */
 }
 
-/* Container for buttons */
-.button-container {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end; /* Align buttons to the right */
-    width: 100%; /* Make the container take full width of form */
-    margin-top: 5px; /* Add margin on top to create more space below the form */
-    margin-left: 20px;
-}
 
-/* Media queries for mobile responsiveness */
+/* Responsive Design */
 @media (max-width: 768px) {
-    .form-container, .navbar {
-        width: 100%;
-    }
-
     h1 {
         font-size: 1.8rem;
     }
-}
 
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.5rem;
+    textarea {
+        height: 150px;
     }
 
     button {
         font-size: 0.9rem;
         padding: 8px 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    textarea {
+        height: 100px;
     }
 }

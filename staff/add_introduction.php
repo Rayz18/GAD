@@ -60,67 +60,78 @@ $current_intro = $result->fetch_assoc()['section_content'] ?? '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Introduction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../staff/assets/css/add_course_section.css?v=1.0">
     <link rel="stylesheet" href="../staff/assets/common/css/StaffNavBar.css">
-    <link rel="stylesheet" href="../staff/assets/common/css/sidebar.css"> <!-- Include sidebar CSS -->
+    <link rel="stylesheet" href="../staff/assets/common/css/sidebar.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../staff/assets/common/js/sidebarToggle.js" defer></script>
 </head>
 
-<body>
-    <?php include '../staff/assets/common/StaffNavBar.php'; ?>
-
+<body class="bg-light">
     <div class="sidebar">
-        <!-- Sidebar content -->
-        <button id="toggle-sidebar">Toggle Sidebar</button>
-        <!-- Add your sidebar links here -->
-    </div>
+    <?php include '../staff/assets/common/StaffNavBar.php'; ?>
+</div>
 
-    <div class="content" id="content">
+<div class="content">
+    <div class="col-lg-9 col-md-8 position-relative">
         <h1>EDIT COURSE INTRODUCTION</h1>
 
         <?php if (isset($success_message)): ?>
-            <p class="success-message"><?php echo $success_message; ?></p>
-        <?php endif; ?>
-        <?php if (isset($error_message)): ?>
-            <p class="error-message"><?php echo $error_message; ?></p>
+            <div class="alert alert-success" role="alert">
+                <?php echo $success_message; ?>
+            </div>
         <?php endif; ?>
 
-        <form method="POST" class="course-form">
-            <textarea name="section_content" rows="10" cols="100"><?php echo htmlspecialchars($current_intro); ?></textarea><br>
-            <div class="button-container">
-                <button type="submit" name="save">Save Introduction</button>
-                <button type="submit" name="back">Back</button>
+        <?php if (isset($error_message)): ?>
+            <div class="alert alert-danger" role="alert">
+                <?php echo $error_message; ?>
             </div>
-            <!-- Hidden input to pass the referrer value with POST -->
+        <?php endif; ?>
+
+        <form method="POST" class="bg-white shadow-sm rounded p-4">
+            <div class="mb-3">
+                <textarea name="section_content" id="section_content" class="form-control border-3 shadow-none" rows="12"><?php echo htmlspecialchars($current_intro); ?></textarea>
+            </div>
+            <div class="d-flex justify-content-end gap-2">
+                <button type="submit" name="save" class="btn btn-primary">Save Introduction</button>
+                <button type="submit" name="back" class="btn btn-secondary">Back</button>
+            </div>
             <input type="hidden" name="referrer" value="<?php echo htmlspecialchars($referrer); ?>">
         </form>
     </div>
-    
+</div>
+
+    </div>
+
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const toggleButton = document.getElementById("toggle-sidebar");
-            const sidebar = document.querySelector(".sidebar");
-            const content = document.getElementById("content");
+       document.addEventListener("DOMContentLoaded", function () {
+    // Select the toggle button and relevant elements
+    const toggleButton = document.querySelector("#toggle-sidebar");
+    const sidebar = document.querySelector(".sidebar");
+    const content = document.querySelector(".content");
 
-            toggleButton.addEventListener("click", function () {
-                sidebar.classList.toggle("collapsed");
-                content.classList.toggle("collapsed");
-            });
-        });
-        
+    // Add click event listener to the toggle button
+    toggleButton.addEventListener("click", function () {
+        sidebar.classList.toggle("collapsed"); // Add/remove 'collapsed' class
+        content.classList.toggle("content-collapsed"); // Adjust content layout
+    });
+});
+
         setTimeout(function() {
-        const successMessage = document.querySelector(".success-message");
-        const errorMessage = document.querySelector(".error-message");
+            const successMessage = document.querySelector(".alert-success");
+            const errorMessage = document.querySelector(".alert-danger");
 
-        if (successMessage) {
-            successMessage.style.opacity = "0"; // Start fade-out
-            setTimeout(() => successMessage.style.display = "none", 300); // Hide after fade-out
-        }
-        if (errorMessage) {
-            errorMessage.style.opacity = "0"; // Start fade-out
-            setTimeout(() => errorMessage.style.display = "none", 300); // Hide after fade-out
-        }
-    }, 3000); // 3000 milliseconds = 3 seconds
+            if (successMessage) {
+                successMessage.style.opacity = "0"; // Start fade-out
+                setTimeout(() => successMessage.style.display = "none", 300); // Hide after fade-out
+            }
+            if (errorMessage) {
+                errorMessage.style.opacity = "0"; // Start fade-out
+                setTimeout(() => errorMessage.style.display = "none", 300); // Hide after fade-out
+            }
+        }, 3000); // 3000 milliseconds = 3 seconds
     </script>
 </body>
 </html>
+

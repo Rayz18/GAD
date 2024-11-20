@@ -41,6 +41,14 @@ function truncateProgramName($name, $limit = 15)
     <!-- Include the Staff Navigation Bar -->
     <?php include '../staff/assets/common/StaffNavBar.php'; ?>
 
+    <div class="layout">
+    <!-- Sidebar -->
+    <div class="sidebar collapsed" id="sidebar"></div>
+
+    <!-- Page Content -->
+    <div id="content" class="content">
+        <div id="toggle-sidebar" class="toggle-sidebar"></div>
+
     <div class="container my-5">
         <h1 class="text-center text-white py-3 custom-header">Manage Programs and Courses</h1>
 
@@ -130,36 +138,18 @@ function truncateProgramName($name, $limit = 15)
         </div>
     </div>
 
-    <!-- Sidebar Toggle Script -->
     <script>
-        $(document).ready(function () {
-            // Sidebar toggle functionality
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-                $('#content').toggleClass('shifted');
-            });
+        document.addEventListener("DOMContentLoaded", function () {
+    const sidebar = document.getElementById("sidebar");
+    const content = document.getElementById("content");
+    const toggleButton = document.getElementById("toggle-sidebar");
 
-            // Highlight selected program dynamically
-            $(".program-card .card-header").on("click", function () {
-                const $this = $(this);
+    toggleButton.addEventListener("click", function () {
+        sidebar.classList.toggle("collapsed");
+        content.classList.toggle("shifted");
+    });
+});
 
-                // Toggle the active class based on collapse state
-                const targetId = $this.find(".toggle-link").data("target");
-                const isExpanded = $(targetId).hasClass("show");
-
-                $(".program-card .card-header").removeClass("active");
-
-                if (!isExpanded) {
-                    $this.addClass("active");
-                }
-            });
-
-            // Remove highlight if any program is closed directly
-            $(".collapse").on("hidden.bs.collapse", function () {
-                const header = $(this).prev(".card-header");
-                header.removeClass("active");
-            });
-        });
     </script>
 </body>
 

@@ -33,25 +33,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Program</title>
-    <link rel="stylesheet" href="../staff/assets/css/add_program.css"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <form action="add_program.php" method="POST" enctype="multipart/form-data">
-        <h2>ADD PROGRAM</h2>
+<body class="bg-light d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <form action="add_program.php" method="POST" enctype="multipart/form-data" class="bg-white p-4 rounded shadow-sm" style="max-width: 500px; width: 100%;">
+        <h2 class="text-center text-primary mb-4">Add Program</h2>
 
-        <label for="program_name">Program Name:</label>
-        <input type="text" id="program_name" name="program_name" required>
+        <div class="mb-3">
+            <label for="program_name" class="form-label fw-bold">Program Name:</label>
+            <input type="text" id="program_name" name="program_name" class="form-control" required>
+        </div>
 
-        <label for="program_desc">Program Description:</label>
-        <textarea id="program_desc" name="program_desc" required></textarea>
+        <div class="mb-3">
+            <label for="program_desc" class="form-label fw-bold">Program Description:</label>
+            <textarea id="program_desc" name="program_desc" class="form-control" rows="3" required></textarea>
+        </div>
 
-        <label for="program_img">Program Image:</label>
-        <input type="file" id="program_img" name="program_img">
+        <div class="mb-3">
+            <label for="program_img" class="form-label fw-bold">Program Image:</label>
+            <input type="file" id="program_img" name="program_img" class="form-control">
+        </div>
 
-        <div class="button-container">
-            <input type="submit" value="Add Program">
-            <a href="staff_dashboard.php" class="back-button">Back</a>
+        <div class="d-flex justify-content-end gap-2">
+            <button type="submit" class="btn btn-primary">Add Program</button>
+            <a href="manage_programs.php" class="btn btn-secondary">Back</a>
         </div>
     </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

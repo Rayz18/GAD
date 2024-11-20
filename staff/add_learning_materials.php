@@ -10,17 +10,10 @@ if (!isset($_SESSION['staff_logged_in'])) {
 $course_id = $_GET['course_id'] ?? null;
 $success_message = '';
 $error_message = '';
-$success_message = '';
-$error_message = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['learning_file'])) {
     $file = $_FILES['learning_file'];
-    $target_dir = "../staff/upload/add_learning_materials/";
-
-    if (!is_dir($target_dir)) {
-        mkdir($target_dir, 0777, true);
-    }
-
+    $target_dir = "../add_learning_materials/";
 
     if (!is_dir($target_dir)) {
         mkdir($target_dir, 0777, true);
@@ -43,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['learning_file'])) {
     }
 }
 
+// Fetch existing learning materials
 $query = "SELECT * FROM learning_materials WHERE course_id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $course_id);
@@ -56,75 +50,122 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Learning Materials</title>
-    <link rel="stylesheet" href="../staff/assets/css/add_learning_materials.css">
+    <title>Learning Materials</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../staff/assets/common/css/StaffNavBar.css">
-    <link rel="stylesheet" href="../staff/assets/common/css/sidebar.css"> <!-- Include sidebar CSS -->
+    <link rel="stylesheet" href="../staff/assets/add_learning_materials.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../staff/assets/common/js/sidebarToggle.js" defer></script>
-    <script>
-        // Hide the notification after 3 seconds
-        document.addEventListener("DOMContentLoaded", function () {
-            setTimeout(function () {
-                const successMessage = document.querySelector(".learning-materials-success-message");
-                const errorMessage = document.querySelector(".learning-materials-error-message");
-                if (successMessage) successMessage.style.display = "none";
-                if (errorMessage) errorMessage.style.display = "none";
-            }, 3000);
-        });
-    </script>
 </head>
 
 <body>
     <?php include '../staff/assets/common/StaffNavBar.php'; ?>
 
-    <div class="sidebar" id="sidebar">
-        <!-- Sidebar content -->
-        <button id="toggle-sidebar">Toggle Sidebar</button>
-        <!-- Add your sidebar links here -->
+    <!-- Sidebar -->
+    <div class="sidebar collapsed">
+        <!-- Sidebar content here -->
     </div>
 
-    <div class="content" id="content">
-        <h1 class="learning-materials-title">UPLOAD LEARNING MATERIALS</h1>
+    <!-- Sidebar Toggle Button -->
+    <div id="toggle-sidebar" class="toggle-sidebar"></div>
 
-        <?php if ($success_message): ?>
-            <p class="learning-materials-success-message"><?php echo $success_message; ?></p>
-        <?php endif; ?>
-        <?php if ($error_message): ?>
-            <p class="learning-materials-error-message"><?php echo $error_message; ?></p>
-        <?php endif; ?>
+    <!-- Main Content -->
+    <div id="content" class="container-fluid px-4 py-5" style="margin-top: -30px;">
+        <h1 style="color: #007bff; font-size: 3rem; font-weight: bold; text-align: center; margin: 0 auto; padding: 20px;">
+            LEARNING MATERIALS
+        </h1>
 
-        <div class="learning-materials-container">
-            <div class="learning-materials-form-container">
-                <h2 class="learning-materials-upload-title">UPLOADING MATERIALS</h2>
-                <form method="POST" enctype="multipart/form-data" class="learning-materials-form">
-                    <input type="file" name="learning_file" class="learning-materials-file-input" required>
-                    <button type="submit" class="learning-materials-upload-button">UPLOAD MATERIAL</button>
-                </form>
-            </div>
+        <!-- Success/Error Messages -->
+        <div style="position: absolute; top: 100px; left: 50%; transform: translateX(-50%); z-index: 1000; text-align: center;">
+            <?php if ($success_message): ?>
+                <div id="successMessage" style="background-color: #d4edda; color: #155724; padding: 10px; border: 1px solid #c3e6cb; border-radius: 5px; display: inline-block;">
+                    <?php echo $success_message; ?>
+                </div>
+            <?php endif; ?>
+            <?php if ($error_message): ?>
+                <div id="errorMessage" style="background-color: #f8d7da; color: #721c24; padding: 10px; border: 1px solid #f5c6cb; border-radius: 5px; display: inline-block;">
+                    <?php echo $error_message; ?>
+                </div>
+            <?php endif; ?>
+        </div>
 
-            <div class="learning-materials-existing-container">
-                <h2 class="learning-materials-existing-title">EXISTING LEARNING MATERIALS</h2>
-                <ul class="learning-materials-list">
+        <script>
+            // Hide the success message after 3 seconds
+            setTimeout(() => {
+                const successMessage = document.getElementById('successMessage');
+                if (successMessage) successMessage.style.display = 'none';
+
+                const errorMessage = document.getElementById('errorMessage');
+                if (errorMessage) errorMessage.style.display = 'none';
+            }, 3000); // 3 seconds
+        </script>
+
+        <div class="container-fluid px-4 py-5" style="margin-top: -10px;">
+            <div class="row g-5 align-items-stretch">
+                <!-- Upload Learning Material Form -->
+                <div class="col-lg-6">
+                    <div class="card shadow"> <!-- Fixed height for alignment -->
+                        <div class="card-header bg-primary text-white text-center">
+                            Upload Learning Material
+                        </div>
+                        <div class="card-body">
+                            <form method="POST" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label for="learning_file" class="form-label fw-bold">File:</label>
+                                    <input type="file" name="learning_file" class="form-control" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Upload Material</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Existing Learning Materials -->
+<div class="col-lg-6">
+    <div class="card shadow" style="height: 536px;"> <!-- Fixed height for alignment -->
+        <div class="card-header bg-success text-white text-center">
+            Existing Learning Materials
+        </div>
+        <div class="card-body" style="height: calc(100% - 58px); overflow-y: auto;">
+            <table class="table table-striped table-bordered">
+                <thead class="table-success">
+                    <tr>
+                        <th style="width: 80%;">File Name</th>
+                        <th style="width: 20%;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
                     <?php while ($row = $result->fetch_assoc()): ?>
-                        <li class="learning-materials-item">
-                            <a href="<?php echo $row['file_path']; ?>" target="_blank"
-                                class="learning-materials-link"><?php echo basename($row['file_path']); ?></a>
-                        </li>
+                        <tr>
+                            <td>
+                                <!-- Display the file name as blue text -->
+                                <span style="color: #007bff;">
+                                    <?php echo basename($row['file_path']); ?>
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <a href="<?php echo $row['file_path']; ?>" target="_blank" class="btn btn-sm btn-success">View</a>
+                            </td>
+                        </tr>
                     <?php endwhile; ?>
-                </ul>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
             </div>
         </div>
     </div>
 
+    <!-- Toggle Sidebar Script -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const toggleButton = document.getElementById("toggle-sidebar");
             const sidebar = document.getElementById("sidebar");
-            const content = document.getElementById("content");
 
             toggleButton.addEventListener("click", function () {
-                sidebar.classList.toggle("collapsed");
-                content.classList.toggle("collapsed");
+                sidebar.classList.toggle("show");
             });
         });
     </script>
