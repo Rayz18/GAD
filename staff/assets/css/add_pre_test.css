@@ -1,0 +1,242 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5; /* Light background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    overflow-y: auto;
+}
+
+.navbar {
+    width: 100%;
+    background-color: #B19CD9; /* Light purple */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+.page-title {
+    color: #B19CD9;
+    margin-top: 30px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    margin-left: 35px;
+}
+
+/* Notification message styling */
+.message {
+    font-size: 1rem;
+    text-align: center; /* Keep it centered or change as needed */
+    position: absolute; /* Absolute positioning */
+    top: 110px; /* Position from the top */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust to center correctly */
+    width: auto; /* Width auto to fit the content */
+    z-index: 10;
+    margin: 0; /* Remove any margins */
+    opacity: 1; /* Ensure full visibility */
+    transition: opacity 0.3s; /* Optional: smooth fade in/out effect */
+}
+
+/* Success message color */
+.message.success {
+    color: #28a745;
+}
+
+/* Error message color */
+.message.error {
+    color: #dc3545;
+}
+
+.question-form {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-height: 500px;
+    max-height: 600px; /* Fixed height for consistency */
+    max-width: 650px;
+    overflow-y: auto !important; /* Allow scrolling if content exceeds max height */
+    position: relative;
+}
+
+.existing-questions {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-height: 500px;
+    max-height: 600px; /* Fixed height for consistency */
+    max-width: 650px;
+    overflow-y: auto !important; /* Allow scrolling if content exceeds max height */
+}
+
+.question-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1100px;
+    width: 120%;
+    padding: 20px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: stretch; /* Ensures both containers have the same height */
+}
+
+.question-form, .existing-questions {
+    transform: translateX(-85px); /* Move 20px to the left */
+}
+
+.question-form {
+    max-width: 500px; /* Increased container width */
+}
+
+.existing-questions {
+    max-width: 500px; /* Increased container width */
+}
+
+.question-container {
+    max-width: 1200px; /* Adjusted for larger container widths */
+}
+
+.section-title {
+    color: #c96a6a;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #333;
+    display: block;
+}
+
+.input-field {
+    width: 100%;
+    max-width: 100%; /* Make it responsive */
+    padding: 8px; /* Add padding for spacing inside the input */
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 0.9rem; /* Adjusted font size */
+    height: auto; /* Allow auto height to accommodate padding */
+    box-sizing: border-box;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5px;
+}
+
+.submit-button {
+    background-color: #C96A6A; /* Green button */
+    color: white;
+    font-size: 1rem;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.submit-button:hover {
+    background-color: #a84545;
+    transform: scale(1.05);
+}
+
+.question-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto; /* Ensure scrolling if the list exceeds container height */
+}
+
+.question-item {
+    background-color: #f8f9fa;
+    padding: 15px;
+    margin-bottom: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.2s;
+    word-wrap: break-word; /* Ensure text wraps within the container */
+    overflow-wrap: break-word; /* For additional browser support */
+}
+
+.question-item:hover {
+    transform: scale(1.02);
+    border-color: #4CAF50;
+}
+
+.question-text {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    white-space: normal; /* Allows text to wrap */
+    word-wrap: break-word; /* Breaks long words if necessary */
+    word-break: break-word; /* Ensures even extremely long words wrap correctly */
+    line-height: 1.4; /* Adds some space between lines */
+}
+
+.correct-answer {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #4CAF50;
+    background-color: #e8f5e9;
+    padding: 5px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    white-space: normal;
+    overflow-wrap: break-word; /* Ensure long words wrap properly */
+    max-width: 100%; /* Prevent overflow */
+    line-height: 1.4; /* Add spacing between lines */
+}
+
+@media (max-width: 992px) {
+    .question-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .input-field {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+.sidebar {
+    width: 250px; /* Set this to your desired width */
+    transition: left 0.3s ease; /* Ensure smooth transition */
+}
+
+.sidebar.collapsed {
+    left: -200px; /* Move the sidebar offscreen */
+}
+
+.content {
+    margin-left: 0; /* Ensure there's no initial margin */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar is toggled */
+}
+
+.content.collapsed {
+    margin-left: 0; /* Adjust margin when sidebar is collapsed */
+}

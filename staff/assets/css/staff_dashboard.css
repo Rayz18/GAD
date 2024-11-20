@@ -1,0 +1,114 @@
+</html> , /* Program Cards */
+.card {
+    height: 300px; /* Set a fixed height for the program card */
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd; /* Add a border for visibility */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a lifted effect */
+    overflow: hidden;
+    background-color: #fff; /* Ensure a clean white background */
+    transition: transform 0.3s, box-shadow 0.3s; /* Add hover effect transitions */
+}
+
+.card:hover {
+    transform: scale(1.02); /* Slightly scale the card on hover */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
+}
+
+.card-body {
+    flex-grow: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 15px; /* Add padding inside the card body */
+    background-color: #f9f9f9; /* Subtle background to distinguish the body */
+    border-top: 2px solid #B19CD9; /* Add a top border for emphasis */
+    border-radius: 0 0 8px 8px; /* Rounded corners at the bottom */
+}
+
+.card-body ul {
+    max-height: 150px; /* Limit the height of the course list */
+    overflow-y: auto; /* Add vertical scroll if course list exceeds max height */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    list-style: none; /* Remove bullets */
+}
+
+.card-title.text-primary {
+    font-size: 1.2em;
+    color: #7A5DAA !important; /* Darker purple for program name */
+    font-weight: bold;
+}
+
+.course-item {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    display: flex; /* Use flexbox for alignment */
+    justify-content: space-between;
+    align-items: center; /* Ensure vertical alignment */
+    color: #007BFF; /* Blue color for the course name */
+    font-weight: bold; /* Bold for emphasis */
+}
+
+.course-item span {
+    flex: 0 0 auto; /* Prevent shrinking and growing of the date */
+    white-space: nowrap; /* Ensure the date never wraps */
+    margin-left: 10px; /* Add spacing between the course name and the date */
+    text-align: right; /* Align the date text */
+    color: #6c757d; /* Muted color for the date */
+}
+
+.course-item:hover {
+    background-color: #e9ecef; /* Light gray background on hover */
+    cursor: default; /* Default cursor to indicate it's not clickable */
+}
+
+.course-item a {
+    text-decoration: none; /* Remove underline if links exist */
+    color: inherit; /* Inherit the blue color */
+    pointer-events: none; /* Disable clickability */
+}
+
+/* H1 Header */
+h1 {
+    width: 100%;
+    font-size: 2em; /* Increase font size for visibility */
+    color: #ffffff; /* Change the font color to white */
+    background: linear-gradient(90deg, #B19CD9, #C96A6A); /* Gradient background */
+    padding: 1rem 2rem; /* Add padding for better visibility */
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 1.5rem; /* Space it from other elements */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for emphasis */
+}
+
+.card-body ul {
+    scrollbar-width: auto; /* Use default browser scrollbar */
+    scrollbar-color: auto; /* Use default browser colors */
+}
+
+/* Sidebar - Default State (Collapsed) */
+.sidebar {
+    width: 0; /* Start collapsed */
+    overflow: hidden; /* Prevent content overflow */
+    transition: width 0.3s ease; /* Smooth transition */
+}
+
+/* Sidebar - Expanded State (when JS removes 'collapsed' class) */
+.sidebar:not(.collapsed) {
+    width: 250px; /* Expanded width */
+}
+
+/* Ensure main content adjusts dynamically */
+main {
+    transition: margin-left 0.3s ease; /* Smooth margin transition */
+    margin-left: 0; /* Default margin when sidebar is collapsed */
+}
+
+main.sidebar-open {
+    margin-left: 250px; /* Adjust margin when sidebar is expanded */
+}

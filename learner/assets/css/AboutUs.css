@@ -1,0 +1,138 @@
+/* General styling for the body and html */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-y: auto;   /* Ensure vertical scrolling only */
+    font-family: Arial, sans-serif;
+    box-sizing: border-box; /* Make sure padding/margins are handled properly */
+    padding-top: 30px; /* Reduced space to bring content closer to the navbar */
+}
+
+/* Apply box-sizing to all elements to prevent overflow */
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+/* Custom Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 6px; /* Set scrollbar width */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #cac5d35d; /* Scrollbar color */
+    border-radius: 6px; /* Rounded scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f4f4f4; /* Scrollbar track color */
+}
+
+
+/* Header image styling */
+.header-image-container {
+    width: 100%;
+    text-align: center;
+    margin-top: 5px; /* Further reduced margin */
+}
+
+.header-image {
+    width: 100%;
+    height: auto; /* Let the height adjust based on image */
+    object-fit: cover;
+    object-position: 0px -50px;
+    margin-bottom: 5px; /* Reduced margin-bottom for closer content */
+}
+
+/* Content and layout */
+.content-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 0; /* Removed padding for closer content */
+    margin-top: -10px; /* Moved content closer to the image */
+    margin-bottom: 20px; /* Further reduced margin-bottom for compact layout */
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 25%;
+    background-color: #fff;
+    padding: 15px; /* Reduced padding for a more compact layout */
+    border: 1px solid #B19CD9;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-top: -10px; /* Moved sidebar closer to the header image */
+}
+
+.sidebar-header {
+    color: #431876;
+    font-weight: bold;
+    padding: 8px 0;
+    text-align: center;
+    margin-bottom: 10px; /* Reduced margin-bottom */
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #B19CD9;
+    color: #ffffff;
+    border-radius: 5px;
+    margin-bottom: 8px; /* Reduced margin for closer spacing */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar ul li:hover {
+    background-color: #431876;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Main content styling */
+.main-content {
+    flex: 1;
+    padding-left: 8px; /* Reduced padding for more compact layout */
+    margin-top: -10px; /* Moved content closer to the image */
+}
+
+/* Section container styling */
+.section-container {
+    display: none; /* Hide all sections by default */
+    border: 1px solid #B19CD9;
+    border-radius: 5px;
+    padding: 12px; /* Reduced padding for compact layout */
+    background-color: white;
+    margin-bottom: 10px; /* Further reduced margin-bottom */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    clear: both; /* Prevent overlap from floated elements */
+    margin-top: -10px; /* Moved section containers closer to the image */
+}
+
+.section-container h2 {
+    color: #431876;
+    padding: 6px; /* Reduced padding for more compact heading */
+    margin: 0 0 10px 0; /* Reduced margin for closer heading to content */
+    border-radius: 5px 5px 0 0;
+    border-bottom: 2px solid #B19CD9;
+}
+
+/* Ensure proper spacing for section paragraphs */
+.section-container p {
+    margin: 8px 0; /* Reduced paragraph margin for compact text layout */
+}
+
+/* Default active section shown on load */
+.section-container.active {
+    display: block;
+}
