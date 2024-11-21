@@ -76,6 +76,19 @@ body {
     margin-bottom: 50px;
 }
 
+.error-message-container {
+    min-height: 20px; /* Reserve space for the error message */
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -147,7 +160,7 @@ form {
 
 .signup-text {
     text-align: center;
-    margin-top: 180px;
+    margin-top: 150px;
     font-size: 14px;
     color: #666;
 }

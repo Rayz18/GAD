@@ -73,7 +73,7 @@ html, body {
 
 /* Logo and title section */
 .logo {
-    margin-top: 15px;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     padding: 1px 0;
@@ -91,9 +91,9 @@ html, body {
 .sidebar-title {
     text-align: center;
     color: white;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
-    line-height: .1;
+    line-height: .1px;
     padding: 10px 0;
     margin: 0;
     white-space: nowrap;
@@ -112,12 +112,12 @@ html, body {
 .menu {
     list-style: none;
     padding: 0;
-    margin-top: 25px;
+    margin-top: 15px;
 }
 
 .menu-item {
     padding: 15px 20px;
-    font-size: 17px;
+    font-size: 14px;
     color: white;
     text-decoration: none;
     display: block;
