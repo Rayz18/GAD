@@ -7,13 +7,19 @@ if (!isset($_SESSION['admin_logged_in'])) {
     exit;
 }
 
-$content_mdrtn_id = $_POST['content_mdrtn_id'];
-$content_type = $_POST['content_type'];
-$action = $_POST['action'];
+// Fetch and validate the inputs
+$action = $_POST['action'] ?? null;
+$content_type = $_POST['content_type'] ?? null;
+$content_mdrtn_id = $_POST['content_mdrtn_id'] ?? null;
 
+if (!$action || !$content_type || !$content_mdrtn_id) {
+    die("Invalid request. Missing required parameters.");
+}
+
+// Determine the status based on the action
 $status = ($action === 'approve') ? 'approved' : 'declined';
 
-// Plural to singular mapping
+// Define mappings for content types
 $content_type_mapping = [
     'programs' => 'program',
     'courses' => 'course',
@@ -32,10 +38,6 @@ $content_type_mapping = [
     'materials' => 'campaign_material'
 ];
 
-// Convert content type to singular using mapping
-$content_type = $content_type_mapping[strtolower($content_type)] ?? strtolower($content_type);
-
-// Define the table and ID field based on content type
 $content_mappings = [
     'program' => ['table' => 'programs', 'id_field' => 'program_id'],
     'course' => ['table' => 'courses', 'id_field' => 'course_id'],
@@ -54,17 +56,32 @@ $content_mappings = [
     'campaign_material' => ['table' => 'campaign_materials', 'id_field' => 'camp_mtrls_id'],
 ];
 
-if (array_key_exists($content_type, $content_mappings)) {
-    $table = $content_mappings[$content_type]['table'];
-    $id_field = $content_mappings[$content_type]['id_field'];
+// Map content type to table and ID field
+$content_type = $content_type_mapping[strtolower($content_type)] ?? strtolower($content_type);
 
-    $stmt = $conn->prepare("UPDATE $table SET status = ? WHERE $id_field = ?");
-    $stmt->bind_param("si", $status, $content_mdrtn_id);
-    $stmt->execute();
-    $stmt->close();
-    header("Location: content_moderation.php?status=updated");
-    exit;
-} else {
+if (!array_key_exists($content_type, $content_mappings)) {
     die("Invalid content type specified.");
 }
+
+$table = $content_mappings[$content_type]['table'];
+$id_field = $content_mappings[$content_type]['id_field'];
+
+// Prepare the update query
+$stmt = $conn->prepare("UPDATE $table SET status = ? WHERE $id_field = ?");
+if (!$stmt) {
+    die("Failed to prepare statement: " . $conn->error);
+}
+
+// Bind parameters and execute
+$stmt->bind_param("si", $status, $content_mdrtn_id);
+if (!$stmt->execute()) {
+    die("Failed to execute query: " . $stmt->error);
+}
+
+// Close the statement before redirecting
+$stmt->close();
+
+// Redirect after successfully updating the status
+header("Location: content_moderation.php?status=updated");
+exit;
 ?>
