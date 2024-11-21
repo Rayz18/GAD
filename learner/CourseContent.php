@@ -231,7 +231,7 @@ while ($row = $seminar->fetch_assoc()) {
                                 <div class="seminar-buttons">
                                     ${seminar.include_registration ? `<a href="register.php?seminar_id=${seminar.seminar_id}&course_id=<?php echo htmlspecialchars($course_id); ?>" class="seminar-button">REGISTER</a>` : ''}
                                     ${seminar.include_attendance ? `<a href="attendance.php?seminar_id=${seminar.seminar_id}&course_id=<?php echo htmlspecialchars($course_id); ?>" class="seminar-button">ATTENDANCE</a>` : ''}
-                                    ${seminar.include_evaluation ? `<a href="evaluation.php?seminar_id=${seminar.seminar_id}" class="seminar-button">EVALUATION</a>` : ''}
+                                    ${seminar.include_evaluation ? `<a href="evaluation.php?seminar_id=${seminar.seminar_id}&course_id=<?php echo htmlspecialchars($course_id); ?>" class="seminar-button">EVALUATION</a>` : ''}
                                 </div>
                             </div>
                             <hr>
