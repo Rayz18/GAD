@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_start();
             // Correctly set the session variable for learner_id
             $_SESSION['learner_id'] = $row['learner_id'];
-            header('Location: Home.php');
+            header('Location: /GAD-1/Home.php');
             exit;
         } else {
             $error_message = "Invalid password!";

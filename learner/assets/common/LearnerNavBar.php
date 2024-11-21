@@ -63,7 +63,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
         // Event listeners to redirect to login and sign-up pages if not logged in
         document.querySelector('.signin-btn').addEventListener('click', function () {
-            window.location.href = '/GAD-1/login.php';
+            window.location.href = '/GAD-1/learner/login.php';
         });
 
         document.querySelector('.signup-btn').addEventListener('click', function () {
