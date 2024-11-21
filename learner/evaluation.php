@@ -4,26 +4,35 @@ session_start();
 
 $seminar_id = $_GET['seminar_id'] ?? null;
 $learner_id = $_SESSION['learner_id'] ?? null;
-$course_id = $_GET['course_id'] ?? null; // Ensure course_id is passed
+$course_id = $_GET['course_id'] ?? null;
 
-if (!$seminar_id || !$course_id) {
-    die("Invalid seminar or course ID.");
+if (!$course_id) {
+    $stmt = $conn->prepare("SELECT course_id FROM seminars WHERE seminar_id = ?");
+    $stmt->bind_param("i", $seminar_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $seminar = $result->fetch_assoc();
+    $course_id = $seminar['course_id'] ?? null;
+
+    if (!$course_id) {
+        die("Unable to retrieve course ID. Debug Info: seminar_id = " . htmlspecialchars($seminar_id));
+    }
 }
 
 $seminar_title = 'Seminar';
-$instructions = '';
+$evaluation_instructions = '';
 
-// Check if the learner is already registered for the seminar
-$registration_check = $conn->prepare("SELECT * FROM registrations WHERE seminar_id = ? AND learner_id = ?");
-$registration_check->bind_param("ii", $seminar_id, $learner_id);
-$registration_check->execute();
-$registration_exists = $registration_check->get_result()->num_rows > 0;
-$registration_check->close();
+// Check if the learner has already submitted evaluation
+$evaluation_check = $conn->prepare("SELECT * FROM evaluations WHERE seminar_id = ? AND learner_id = ?");
+$evaluation_check->bind_param("ii", $seminar_id, $learner_id);
+$evaluation_check->execute();
+$evaluation_exists = $evaluation_check->get_result()->num_rows > 0;
+$evaluation_check->close();
 
-if ($registration_exists) {
-    $already_registered = true;
+if ($evaluation_exists) {
+    $already_evaluated = true;
 
-    // Fetch seminar title for the registered seminar
+    // Fetch seminar title for the evaluated seminar
     $title_stmt = $conn->prepare("SELECT seminar_title FROM seminars WHERE seminar_id = ? LIMIT 1");
     $title_stmt->bind_param("i", $seminar_id);
     $title_stmt->execute();
@@ -33,22 +42,22 @@ if ($registration_exists) {
     }
     $title_stmt->close();
 } else {
-    $already_registered = false;
+    $already_evaluated = false;
 
-    // Fetch seminar title and instructions
-    $title_stmt = $conn->prepare("SELECT seminar_title, instructions FROM seminars WHERE seminar_id = ? LIMIT 1");
+    // Fetch seminar title and evaluation instructions
+    $title_stmt = $conn->prepare("SELECT seminar_title, evaluation_instructions FROM seminars WHERE seminar_id = ? LIMIT 1");
     $title_stmt->bind_param("i", $seminar_id);
     $title_stmt->execute();
     $seminar_data = $title_stmt->get_result()->fetch_assoc();
 
     if ($seminar_data) {
         $seminar_title = $seminar_data['seminar_title'];
-        $instructions = $seminar_data['instructions'] ?? '';
+        $evaluation_instructions = $seminar_data['evaluation_instructions'] ?? '';
     }
     $title_stmt->close();
 
-    // Fetch custom fields for the seminar
-    $stmt = $conn->prepare("SELECT * FROM seminar_fields WHERE seminar_id = ?");
+    // Fetch custom fields for the seminar's evaluation
+    $stmt = $conn->prepare("SELECT * FROM evaluation_fields WHERE seminar_id = ?");
     $stmt->bind_param("i", $seminar_id);
     $stmt->execute();
     $fields = $stmt->get_result();
@@ -63,7 +72,7 @@ if ($registration_exists) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seminar Registration</title>
+    <title>Seminar Evaluation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .instruction-text {
@@ -75,24 +84,24 @@ if ($registration_exists) {
 
 <body class="bg-light d-flex align-items-center justify-content-center min-vh-100">
     <div class="bg-white col-md-6 col-lg-8 p-4 rounded shadow-sm">
-        <h1 class="fs-5 fw-semibold mb-5">Registration</h1>
+        <h1 class="fs-5 fw-semibold mb-5">Evaluation</h1>
         <h2 class="fs-3 fw-bold mb-5"><?php echo htmlspecialchars($seminar_title); ?></h2>
 
-        <?php if ($already_registered): ?>
+        <?php if ($already_evaluated): ?>
             <div class="alert alert-info text-center">
-                You've successfully registered to the seminar "<?php echo htmlspecialchars($seminar_title); ?>"!
+                You've already submitted evaluation for the seminar "<?php echo htmlspecialchars($seminar_title); ?>"!
             </div>
             <a href="CourseContent.php?course_id=<?php echo htmlspecialchars($course_id); ?>&tab=seminar"
                 class="btn btn-primary w-100 mt-3">View Seminar</a>
         <?php else: ?>
-            <p class="fs-6 text-muted mb-4 instruction-text"><?php echo htmlspecialchars($instructions); ?></p>
+            <p class="fs-6 text-muted mb-4 instruction-text"><?php echo htmlspecialchars($evaluation_instructions); ?></p>
 
             <?php if (!$fields_exist): ?>
                 <div class="alert alert-warning text-center">
-                    Registration is not yet available.
+                    Evaluation is not yet available.
                 </div>
             <?php else: ?>
-                <form action="submit_registration.php" method="POST">
+                <form action="submit_evaluation.php" method="POST">
                     <input type="hidden" name="seminar_id" value="<?php echo htmlspecialchars($seminar_id); ?>">
                     <input type="hidden" name="course_id" value="<?php echo htmlspecialchars($course_id); ?>">
 
@@ -110,9 +119,9 @@ if ($registration_exists) {
                             <?php elseif ($field['field_type'] === 'radio' || $field['field_type'] === 'dropdown'): ?>
                                 <?php foreach (json_decode($field['options']) as $option): ?>
                                     <div class="form-check">
-                                        <input type="<?php echo $field['field_type'] === 'radio' ? 'radio' : 'checkbox'; ?>"
-                                            name="field_<?php echo $field['field_id']; ?>[]"
-                                            value="<?php echo htmlspecialchars($option); ?>" class="form-check-input">
+                                        <input type="<?php echo $field['field_type'] === 'radio' ? 'radio' : 'checkbox'; ?>[]"
+                                            name="field_<?php echo $field['field_id']; ?>" value="<?php echo htmlspecialchars($option); ?>"
+                                            class="form-check-input">
                                         <label class="form-check-label"><?php echo htmlspecialchars($option); ?></label>
                                     </div>
                                 <?php endforeach; ?>

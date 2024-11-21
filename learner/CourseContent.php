@@ -230,8 +230,8 @@ while ($row = $seminar->fetch_assoc()) {
                                 </div>
                                 <div class="seminar-buttons">
                                     ${seminar.include_registration ? `<a href="register.php?seminar_id=${seminar.seminar_id}&course_id=<?php echo htmlspecialchars($course_id); ?>" class="seminar-button">REGISTER</a>` : ''}
-                                    ${seminar.include_attendance ? `<a href="attendance.php?seminar_id=${seminar.seminar_id}" class="seminar-button">ATTENDANCE</a>` : ''}
-                                    ${seminar.include_evaluation ? `<a href="evaluation.php?seminar_id=${seminar.seminar_id}" class="seminar-button">EVALUATION</a>` : ''}
+                                    ${seminar.include_attendance ? `<a href="attendance.php?seminar_id=${seminar.seminar_id}&course_id=<?php echo htmlspecialchars($course_id); ?>" class="seminar-button">ATTENDANCE</a>` : ''}
+                                    ${seminar.include_evaluation ? `<a href="evaluation.php?seminar_id=${seminar.seminar_id}&course_id=<?php echo htmlspecialchars($course_id); ?>" class="seminar-button">EVALUATION</a>` : ''}
                                 </div>
                             </div>
                             <hr>
@@ -242,16 +242,24 @@ while ($row = $seminar->fetch_assoc()) {
         };
 
         document.addEventListener("DOMContentLoaded", function () {
-            const toggleButton = document.getElementById('sidebar-toggle');
-            if (toggleButton) {
-                toggleButton.addEventListener('click', toggleSidebar);
+            const urlParams = new URLSearchParams(window.location.search);
+            const tab = urlParams.get('tab') || 'introduction';
+
+            // Automatically activate the tab specified in the URL (or default to 'introduction')
+            const targetTabElement = document.querySelector(`.menu-item[onclick*="${tab}"]`);
+            if (targetTabElement) {
+                activateTab(targetTabElement, tab);
             }
 
-            const introductionTab = document.querySelector('.menu-item[onclick*="introduction"]');
-            if (introductionTab) {
-                activateTab(introductionTab, 'introduction');
-            }
+            document.getElementById('sidebar-toggle').addEventListener('click', toggleSidebar);
         });
+
+        function activateTab(tabElement, tabName) {
+            const contentSection = document.getElementById('content-section');
+            document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
+            tabElement.classList.add('active');
+            contentSection.innerHTML = contentData[tabName] || "<p>No content available.</p>";
+        }
 
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
@@ -271,16 +279,6 @@ while ($row = $seminar->fetch_assoc()) {
             } else {
                 console.error("Sidebar, content, or toggle button not found in DOM.");
             }
-        }
-
-        function activateTab(tabElement, tabName) {
-            const contentSection = document.getElementById('content-section');
-            const menuItems = document.querySelectorAll('.menu-item');
-
-            menuItems.forEach(item => item.classList.remove('active'));
-            tabElement.classList.add('active');
-
-            contentSection.innerHTML = contentData[tabName] || "<p>No content available.</p>";
         }
     </script>
 </body>

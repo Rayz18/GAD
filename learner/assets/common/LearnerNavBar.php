@@ -9,8 +9,9 @@ if (session_status() == PHP_SESSION_NONE) {
 <nav class="user-navigation-bar">
     <!-- Logo Section -->
     <div class="user-nav-logo">
-        <img src="./assets/images/BSU.png" alt="BSU Logo" class="user-logo">
-        <img src="./assets/images/GAD.png" alt="GAD Logo" class="user-logo">
+        <!-- Use absolute paths for logos -->
+        <img src="/GAD-1/learner/assets/images/BSU.png" alt="BSU Logo" class="user-logo">
+        <img src="/GAD-1/learner/assets/images/GAD.png" alt="GAD Logo" class="user-logo">
         <div class="user-nav-titles">
             <span class="user-nav-title main-title">BATANGAS STATE UNIVERSITY - THE NATIONAL ENGINEERING
                 UNIVERSITY</span>
@@ -20,17 +21,19 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <!-- Navigation Menu -->
     <ul class="user-nav-menu">
-        <li><a href="Home.php">Home</a></li>
-        <li><a href="AboutUs.php">About Us</a></li>
-        <li><a href="Program.php">Program</a></li>
-        <li><a href="AdvocacyCampaign.php">Advocacy Campaign</a></li>
-        <li><a href="Certificate.php">Certificate</a></li>
-        <li><a href="ConnectWithUs.php">Connect With Us</a></li>
+        <!-- Use absolute paths for menu links -->
+        <li><a href="/GAD-1/Home.php">Home</a></li>
+        <li><a href="/GAD-1/learner/AboutUs.php">About Us</a></li>
+        <li><a href="/GAD-1/learner/Program.php">Program</a></li>
+        <li><a href="/GAD-1/learner/AdvocacyCampaign.php">Advocacy Campaign</a></li>
+        <li><a href="/GAD-1/learner/Certificate.php">Certificate</a></li>
+        <li><a href="/GAD-1/learner/ConnectWithUs.php">Connect With Us</a></li>
     </ul>
 
     <!-- Profile Icon -->
     <div class="user-profile-icon" onclick="togglePopup()">
-        <img src="./assets/images/icon.png" alt="Profile" class="user-profile">
+        <!-- Use absolute path for profile icon -->
+        <img src="/GAD-1/learner/assets/images/icon.png" alt="Profile" class="user-profile">
     </div>
 
     <!-- Profile Popup -->
@@ -60,17 +63,17 @@ if (session_status() == PHP_SESSION_NONE) {
 
         // Event listeners to redirect to login and sign-up pages if not logged in
         document.querySelector('.signin-btn').addEventListener('click', function () {
-            window.location.href = 'login.php';
+            window.location.href = '/GAD-1/learner/login.php';
         });
 
         document.querySelector('.signup-btn').addEventListener('click', function () {
-            window.location.href = 'sign-up.php';
+            window.location.href = '/GAD-1/learner/sign-up.php';
         });
 
         // Logout function to destroy session and redirect to login page
         function logout() {
             // Send a request to logout.php to handle session destruction
-            window.location.href = 'logout.php';
+            window.location.href = '/GAD-1/learner/logout.php';
         }
     </script>
 </nav>

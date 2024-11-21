@@ -4,6 +4,7 @@ header('Content-Type: application/json');
 session_start();
 
 try {
+    // Retrieve JSON data from the request
     $data = json_decode(file_get_contents("php://input"), true);
 
     if (!isset($data['field_id']) || empty($data['field_id'])) {
@@ -12,22 +13,18 @@ try {
 
     $field_id = $data['field_id'];
 
-    $conn->autocommit(false); // Begin transaction
-
     // Prepare the delete statement
-    $stmt = $conn->prepare("DELETE FROM seminar_fields WHERE field_id = ?");
+    $stmt = $conn->prepare("DELETE FROM attendance_fields WHERE field_id = ?");
     if (!$stmt) {
-        throw new Exception("Failed to prepare statement: " . $conn->error);
+        throw new Exception("Failed to prepare statement.");
     }
 
     $stmt->bind_param("i", $field_id);
 
     if ($stmt->execute()) {
-        $conn->commit(); // Commit changes
         echo json_encode(['success' => true, 'message' => 'Field deleted successfully.']);
     } else {
-        $conn->rollback(); // Rollback on failure
-        throw new Exception("Error executing delete query: " . $stmt->error);
+        throw new Exception("Error executing delete query.");
     }
 
     $stmt->close();

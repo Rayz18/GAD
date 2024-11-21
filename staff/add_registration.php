@@ -122,9 +122,11 @@ $instructions_stmt->close();
                             <?php endif; ?>
                         </div>
 
+                        <!-- Removed the onclick attribute -->
                         <i class="bi bi-trash text-danger ms-2" role="button"
-                            onclick="deleteField(<?php echo $field['field_id']; ?>)" style="cursor: pointer;"></i>
+                            data-field-id="<?php echo $field['field_id']; ?>" style="cursor: pointer;"></i>
                     </div>
+
                 <?php endwhile; ?>
             </div>
 
@@ -186,18 +188,21 @@ $instructions_stmt->close();
     <script>
         const fieldModal = new bootstrap.Modal(document.getElementById('fieldModal'));
 
+        // Function to open the modal for adding a new field
         function openModal() {
             document.getElementById("add-field-form").reset();
             toggleChoices();
             fieldModal.show();
         }
 
+        // Function to toggle the display of the options input section based on field type
         function toggleChoices() {
             const fieldType = document.getElementById('field-type').value;
             const choicesSection = document.getElementById('choices-section');
             choicesSection.classList.toggle('d-none', fieldType !== 'dropdown' && fieldType !== 'radio');
         }
 
+        // Function to dynamically add a new choice option for dropdown or radio fields
         function addChoice() {
             const optionsContainer = document.getElementById('options-container');
             const optionInput = document.createElement('div');
@@ -213,12 +218,14 @@ $instructions_stmt->close();
             });
         }
 
+        // Function to submit a new field to the backend
         function submitField() {
             const fieldLabel = document.getElementById('field-label').value;
             const fieldType = document.getElementById('field-type').value;
             const isRequired = document.getElementById('field-required').checked;
             let options = [];
 
+            // Collect options if the field type is dropdown or radio
             if (fieldType === 'dropdown' || fieldType === 'radio') {
                 document.querySelectorAll('.option-input').forEach(input => {
                     if (input.value) options.push(input.value);
@@ -255,7 +262,7 @@ $instructions_stmt->close();
                                             <label class="form-check-label">${option}</label>
                                         </div>`).join('') : ''}
                                 </div>
-                                <i class="bi bi-trash text-danger ms-2" role="button" onclick="deleteField(${data.field_id})" style="cursor: pointer;"></i>
+                                <i class="bi bi-trash text-danger ms-2" role="button" data-field-id="${data.field_id}" style="cursor: pointer;"></i>
                             </div>`;
 
                         document.getElementById("fields-container").insertAdjacentHTML("beforeend", newFieldHTML);
@@ -271,37 +278,41 @@ $instructions_stmt->close();
             fieldModal.hide();
         }
 
+        // Function to delete a field
+        // Function to delete a field
         function deleteField(fieldId) {
+            if (!fieldId) {
+                alert("Field ID is missing. Please try again.");
+                return;
+            }
+
             if (confirm("Are you sure you want to delete this field?")) {
-                // Send the field_id to the server for deletion
                 fetch('delete_field.php', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ field_id: fieldId })  // Ensure field_id is being sent
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ field_id: fieldId })
                 })
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            alert("Field deleted successfully!");
+                            alert(data.message);
                             document.getElementById(`field-${fieldId}`).remove();
                         } else {
-                            alert("Error deleting field: " + data.message);
+                            alert(data.message);
                         }
                     })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert("An error occurred. Please try again.");
-                    });
+                    .catch(error => console.error("Error:", error));
             }
         }
 
-
-        // Disable the "leave site?" warning when the "Update Registration" button is clicked
-        document.getElementById("registration-form").addEventListener("submit", function () {
-            window.removeEventListener("beforeunload", handleBeforeUnload);  // Disable warning on submit
+        // Event listener for delete icons within the fields container
+        document.getElementById('fields-container').addEventListener('click', function (e) {
+            if (e.target && e.target.classList.contains('bi-trash')) {
+                const fieldId = e.target.getAttribute('data-field-id');
+                deleteField(fieldId);
+            }
         });
+
 
         // Adding reload page warning for page reload (only for reload actions)
         function handleBeforeUnload(event) {
@@ -310,6 +321,7 @@ $instructions_stmt->close();
         }
 
         window.addEventListener("beforeunload", handleBeforeUnload);  // Re-enable the warning
+
     </script>
 </body>
 
