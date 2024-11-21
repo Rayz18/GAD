@@ -13,7 +13,7 @@ $program_id = $_GET['program_id'];
 $learner_id = $_SESSION['learner_id'];
 
 // Fetch approved program details using the program_id
-$program_query = $conn->query("SELECT * FROM `programs` WHERE `program_id` = '$program_id' AND `status` = 'approved'");
+$program_query = $conn->query("SELECT * FROM programs WHERE program_id = '$program_id' AND status = 'approved'");
 $program = $program_query->fetch_assoc();
 
 if (!$program) {
@@ -27,27 +27,28 @@ if (!$program) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($program['program_name']); ?> - Learner Interface</title> <!-- Dynamic Title -->
+    <title><?php echo htmlspecialchars($program['program_name']); ?> - Learner Interface</title>
     <link rel="stylesheet" href="../learner/assets/common/css/LearnerNavBar.css">
     <link rel="stylesheet" href="../learner/assets/css/Course.css">
 </head>
 
 <body class="bg-light-gray">
+
     <?php include '../learner/assets/common/LearnerNavBar.php'; ?>
 
     <div class="title-section">
         <h1><?php echo htmlspecialchars($program['program_name']); ?></h1>
-        <!-- Dynamic Program Name in Title Section -->
     </div>
 
     <div class="courses-container">
         <?php
-        // Fetch approved courses associated with the program_id
-        $query = $conn->query("SELECT * FROM `courses` WHERE `program_id` = '$program_id' AND `status` = 'approved'");
+        $query = $conn->query("SELECT * FROM courses WHERE program_id = '$program_id' AND status = 'approved'");
 
-        // Loop through each course and display it
         if ($query->num_rows > 0) {
             while ($course = $query->fetch_assoc()) {
+                // Check enrollment status
+                $enrollment_query = $conn->query("SELECT * FROM enrollments WHERE course_id = '{$course['course_id']}' AND learner_id = '$learner_id'");
+                $is_enrolled = $enrollment_query->num_rows > 0;
                 ?>
                 <div class="course-card">
                     <div class="course-image">
@@ -60,11 +61,23 @@ if (!$program) {
                         </div>
                         <p class="course-text"><?php echo htmlspecialchars($course['course_desc']); ?></p>
                         <div class="view-course">
-                            <a href="../learner/CourseContent.php?course_id=<?php echo $course['course_id']; ?>"
-                                class="button">View
-                                Course</a>
+                            <?php if ($is_enrolled) { ?>
+                                <a href="../learner/CourseContent.php?course_id=<?php echo $course['course_id']; ?>"
+                                    class="button">View Course</a>
+                            <?php } else { ?>
+                                <a href="#" class="button disabled">Enroll to View</a>
+                            <?php } ?>
                         </div>
                         <p class="course-date"><?php echo htmlspecialchars($course['course_date']); ?></p>
+                        <div class="enroll-actions">
+                            <?php if ($is_enrolled) { ?>
+                                <a href="../learner/unenroll.php?course_id=<?php echo $course['course_id']; ?>"
+                                    class="unenroll-link">Unenroll</a>
+                            <?php } else { ?>
+                                <a href="../learner/enroll.php?course_id=<?php echo $course['course_id']; ?>"
+                                    class="enroll-link">Enroll</a>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
                 <?php
