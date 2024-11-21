@@ -14,55 +14,55 @@ if (!$course_id) {
     exit;
 }
 
-// Fetch Course Details
-$query = "SELECT * FROM courses WHERE course_id = ?";
+// Fetch approved course details
+$query = "SELECT * FROM courses WHERE course_id = ? AND status = 'approved'";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $course_id);
 $stmt->execute();
 $course = $stmt->get_result()->fetch_assoc();
 if (!$course) {
-    echo "Course not found.";
+    echo "Course not found or not approved.";
     exit;
 }
 
-// Fetch Introduction Content
-$query = "SELECT * FROM course_sections WHERE course_id = ? AND section_name = 'Introduction'";
+// Fetch approved Introduction Content
+$query = "SELECT * FROM course_sections WHERE course_id = ? AND section_name = 'Introduction' AND status = 'approved'";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $course_id);
 $stmt->execute();
 $course_section = $stmt->get_result()->fetch_assoc();
 
-// Fetch Pre-Test Questions
-$query = "SELECT * FROM pre_test_questions WHERE course_id = ?";
-$stmt = $conn->prepare($query);
+// Fetch approved Pre-Test Questions
+$query = "SELECT * FROM pre_test_questions WHERE course_id = ? AND status = 'approved'";
+$stmt->prepare($query);
 $stmt->bind_param("i", $course_id);
 $stmt->execute();
 $pre_test_questions = $stmt->get_result();
 
-// Fetch Learning Materials
-$query = "SELECT * FROM learning_materials WHERE course_id = ?";
-$stmt = $conn->prepare($query);
+// Fetch approved Learning Materials
+$query = "SELECT * FROM learning_materials WHERE course_id = ? AND status = 'approved'";
+$stmt->prepare($query);
 $stmt->bind_param("i", $course_id);
 $stmt->execute();
 $learning_materials = $stmt->get_result();
 
-// Fetch Videos
-$query = "SELECT * FROM course_videos WHERE course_id = ?";
-$stmt = $conn->prepare($query);
+// Fetch approved Videos
+$query = "SELECT * FROM course_videos WHERE course_id = ? AND status = 'approved'";
+$stmt->prepare($query);
 $stmt->bind_param("i", $course_id);
 $stmt->execute();
 $videos = $stmt->get_result();
 
-// Fetch Post-Test Questions
-$query = "SELECT * FROM post_test_questions WHERE course_id = ?";
-$stmt = $conn->prepare($query);
+// Fetch approved Post-Test Questions
+$query = "SELECT * FROM post_test_questions WHERE course_id = ? AND status = 'approved'";
+$stmt->prepare($query);
 $stmt->bind_param("i", $course_id);
 $stmt->execute();
 $post_test_questions = $stmt->get_result();
 
-// Fetch Seminar Details
-$query = "SELECT * FROM seminars WHERE course_id = ?";
-$stmt = $conn->prepare($query);
+// Fetch approved Seminar Details
+$query = "SELECT * FROM seminars WHERE course_id = ? AND status = 'approved'";
+$stmt->prepare($query);
 $stmt->bind_param("i", $course_id);
 $stmt->execute();
 $seminar = $stmt->get_result();

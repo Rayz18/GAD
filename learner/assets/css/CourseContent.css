@@ -113,6 +113,14 @@ html, body {
     min-height: calc(100vh - 70px);
 }
 
+.content-section p {
+    white-space: normal;       /* Allow the text to wrap to the next line */
+    word-wrap: break-word;     /* Break long words if necessary */
+    overflow-wrap: break-word; /* Ensures words break gracefully */
+    line-height: 1.6;          /* Adds spacing between lines for readability */
+}
+
+
 .content.shifted {
     margin-left: 250px;
 }

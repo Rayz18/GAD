@@ -31,14 +31,13 @@ if (!$sections_query) {
                 <div class="list-group-item d-flex justify-content-between align-items-center">
                     <strong><?php echo htmlspecialchars($section['section_name']); ?></strong>
                     <div>
-                        <form method="POST" action="moderate_content_action.php" class="d-inline">
-                            <input type="hidden" name="content_mdrtn_id" value="<?php echo $section['section_id']; ?>">
-                            <input type="hidden" name="content_type" value="section">
-                            <button type="submit" name="action" value="approve"
-                                class="btn btn-success btn-sm">Approve</button>
-                            <button type="submit" name="action" value="decline"
-                                class="btn btn-danger btn-sm">Decline</button>
-                        </form>
+                    <form action="moderate_content_action.php" method="post">
+    <input type="hidden" name="content_mdrtn_id" value="<?php echo $row[$columns[0]]; ?>">
+    <input type="hidden" name="content_type" value="<?php echo strtolower($content_type); ?>">
+    <button type="submit" name="action" value="approve" class="btn btn-success">Approve</button>
+    <button type="submit" name="action" value="decline" class="btn btn-danger">Decline</button>
+</form>
+
                     </div>
                 </div>
             <?php endwhile; ?>
