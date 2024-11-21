@@ -63,6 +63,7 @@ html, body {
     align-items: center;
 }
 
+
 .enroll-actions {
     position: absolute;
     bottom: 15px; /* Place below the course date */
@@ -90,7 +91,6 @@ html, body {
     opacity: 0.6;
     text-decoration: none;
 }
-
 
 /* Adjust the position of the course date */
 .course-date {

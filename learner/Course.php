@@ -42,6 +42,7 @@ if (!$program) {
 
     <div class="courses-container">
         <?php
+        // Fetch approved courses associated with the program_id
         $query = $conn->query("SELECT * FROM courses WHERE program_id = '$program_id' AND status = 'approved'");
 
         if ($query->num_rows > 0) {
