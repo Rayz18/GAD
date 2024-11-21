@@ -268,3 +268,28 @@ body {
     font-weight: bold;
 }
 
+/* Sidebar Styling */
+.sidebar {
+    width: 250px; /* Default expanded width */
+    height: 100vh; /* Full viewport height */
+    background-color: #343a40;
+    transition: width 0.3s ease; /* Smooth transition */
+    overflow-x: hidden; /* Hide content when collapsed */
+    position: fixed; /* Keep sidebar fixed */
+    top: 0;
+    left: 0;
+}
+
+.sidebar.collapsed {
+    width: 0; /* Collapsed width */
+}
+
+/* Content Styling */
+.content {
+    margin-left: 250px; /* Adjust for expanded sidebar */
+    transition: margin-left 0.3s ease; /* Smooth transition for content */
+}
+
+.content.shifted {
+    margin-left: 0; /* Adjust for collapsed sidebar */
+}

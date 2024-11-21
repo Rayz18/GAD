@@ -5,11 +5,13 @@ session_start();
 // Check if staff is logged in
 if (!isset($_SESSION['staff_logged_in'])) {
     header('Location: staff_login.php');
-    exit();  
+    exit();
 }
 
 $course_id = $_GET['course_id'] ?? null;
 $referrer = $_GET['ref'] ?? 'manage_programs.php'; // Default to manage_programs.php if ref is not set
+$success_message = '';
+$error_message = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['save'])) {
     $section_content = $_POST['section_content'];
@@ -51,7 +53,6 @@ $stmt->bind_param("i", $course_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $current_intro = $result->fetch_assoc()['section_content'] ?? '';
-
 ?>
 
 <!DOCTYPE html>
@@ -59,68 +60,83 @@ $current_intro = $result->fetch_assoc()['section_content'] ?? '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Introduction</title>
-    <link rel="stylesheet" href="../staff/assets/css/add_course_section.css?v=1.0">
+    <title>Edit Course Introduction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../staff/assets/common/css/StaffNavBar.css">
-    <link rel="stylesheet" href="../staff/assets/common/css/sidebar.css"> <!-- Include sidebar CSS -->
+    <link rel="stylesheet" href="../staff/assets/css/add_course_section.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../staff/assets/common/js/sidebarToggle.js" defer></script>
 </head>
 
 <body>
     <?php include '../staff/assets/common/StaffNavBar.php'; ?>
 
-    <div class="sidebar">
-        <!-- Sidebar content -->
-        <button id="toggle-sidebar">Toggle Sidebar</button>
-        <!-- Add your sidebar links here -->
-    </div>
+    <div class="layout">
+        <!-- Sidebar -->
+        <div id="toggle-sidebar" class="toggle-sidebar">
+            <!-- Sidebar content can go here -->
+        </div>
 
-    <div class="content" id="content">
-        <h1>EDIT COURSE INTRODUCTION</h1>
-
-        <?php if (isset($success_message)): ?>
-            <p class="success-message"><?php echo $success_message; ?></p>
-        <?php endif; ?>
-        <?php if (isset($error_message)): ?>
-            <p class="error-message"><?php echo $error_message; ?></p>
-        <?php endif; ?>
-
-        <form method="POST" class="course-form">
-            <textarea name="section_content" rows="10" cols="100"><?php echo htmlspecialchars($current_intro); ?></textarea><br>
-            <div class="button-container">
-                <button type="submit" name="save">Save Introduction</button>
-                <button type="submit" name="back">Back</button>
+        <!-- Main Content -->
+        <div id="content" class="content">
+            <!-- Toggle Sidebar Icon -->
+            <div id="toggle-sidebar" class="toggle-sidebar"></div>
+            <h1 class="page-title">EDIT COURSE INTRODUCTION</h1>
+            
+            <!-- Success/Error Messages -->
+            <div class="messages">
+                <?php if (!empty($success_message)): ?>
+                    <div class="alert alert-success"><?php echo $success_message; ?></div>
+                <?php endif; ?>
+                <?php if (!empty($error_message)): ?>
+                    <div class="alert alert-danger"><?php echo $error_message; ?></div>
+                <?php endif; ?>
             </div>
-            <!-- Hidden input to pass the referrer value with POST -->
-            <input type="hidden" name="referrer" value="<?php echo htmlspecialchars($referrer); ?>">
-        </form>
+
+            <form method="POST" class="form-container">
+    <div class="mb-3">
+        <textarea 
+            name="section_content" 
+            id="section_content" 
+            class="form-control" 
+            rows="12" 
+            style="width: 100%; max-width: 1200px;"><?php echo htmlspecialchars($current_intro); ?></textarea>
     </div>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const toggleButton = document.getElementById("toggle-sidebar");
-            const sidebar = document.querySelector(".sidebar");
-            const content = document.getElementById("content");
+    <div class="form-buttons">
+        <button type="submit" name="save" class="btn btn-primary">Save Introduction</button>
+        <button type="submit" name="back" class="btn btn-secondary">Back</button>
+        <input type="hidden" name="referrer" value="<?php echo htmlspecialchars($referrer); ?>">
+    </div>
+</form>
 
-            toggleButton.addEventListener("click", function () {
-                sidebar.classList.toggle("collapsed");
-                content.classList.toggle("collapsed");
-            });
+        <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const successMessage = document.querySelector(".alert-success");
+        const errorMessage = document.querySelector(".alert-danger");
+
+        setTimeout(() => {
+            if (successMessage) successMessage.style.display = "none";
+            if (errorMessage) errorMessage.style.display = "none";
+        }, 3000);
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const sidebar = document.getElementById("sidebar");
+        const content = document.getElementById("content");
+        const toggleButton = document.getElementById("toggle-sidebar");
+
+        toggleButton.addEventListener("click", function () {
+            if (sidebar.classList.contains("open")) {
+                // Close the sidebar
+                sidebar.classList.remove("open");
+                content.classList.remove("shifted");
+            } else {
+                // Open the sidebar
+                sidebar.classList.add("open");
+                content.classList.add("shifted");
+            }
         });
-        
-        setTimeout(function() {
-        const successMessage = document.querySelector(".success-message");
-        const errorMessage = document.querySelector(".error-message");
-
-        if (successMessage) {
-            successMessage.style.opacity = "0"; // Start fade-out
-            setTimeout(() => successMessage.style.display = "none", 300); // Hide after fade-out
-        }
-        if (errorMessage) {
-            errorMessage.style.opacity = "0"; // Start fade-out
-            setTimeout(() => errorMessage.style.display = "none", 300); // Hide after fade-out
-        }
-    }, 3000); // 3000 milliseconds = 3 seconds
-    </script>
+    });
+</script>
 </body>
 </html>

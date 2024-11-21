@@ -44,90 +44,110 @@ $result = $stmt->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pre-Test Questions</title>
-    <link rel="stylesheet" href="../staff/assets/css/add_pre_test.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../staff/assets/common/css/StaffNavBar.css">
+    <link rel="stylesheet" href="../staff/assets/css/add_pre_test.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../staff/assets/common/js/sidebarToggle.js" defer></script>
-    <script>
-        // JavaScript to hide the success message after 3 seconds
-        document.addEventListener("DOMContentLoaded", function() {
-            const successMessage = document.querySelector(".message.success");
-            if (successMessage) {
-                setTimeout(() => {
-                    successMessage.style.display = "none";
-                }, 3000);
-            }
-        });
-    </script>
 </head>
 
 <body>
     <?php include '../staff/assets/common/StaffNavBar.php'; ?>
 
-    <div class="sidebar" id="sidebar">
-        <button id="toggle-sidebar">Toggle Sidebar</button>
-        <!-- Add your sidebar links here -->
-    </div>
+    <!-- Sidebar -->
+    <div class="sidebar collapsed"></div>
 
-    <div class="content" id="content">
+    <!-- Sidebar Toggle Button -->
+    <div id="toggle-sidebar" class="toggle-sidebar"></div>
+
+    <!-- Main Content -->
+    <div id="content" class="container-fluid">
         <h1 class="page-title">PRE-TEST QUESTIONS</h1>
 
-        <?php if ($success_message): ?>
-            <p class="message success"><?php echo $success_message; ?></p>
-        <?php endif; ?>
-        <?php if ($error_message): ?>
-            <p class="message error"><?php echo $error_message; ?></p>
-        <?php endif; ?>
+        <!-- Success/Error Messages -->
+        <div class="messages">
+            <?php if ($success_message): ?>
+                <div id="successMessage" class="alert alert-success">
+                    <?php echo $success_message; ?>
+                </div>
+            <?php endif; ?>
+            <?php if ($error_message): ?>
+                <div id="errorMessage" class="alert alert-danger">
+                    <?php echo $error_message; ?>
+                </div>
+            <?php endif; ?>
+        </div>
 
-        <div class="question-container">
-            <div class="question-form">
-                <h2 class="section-title">ADD PRE-TEST QUESTION</h2>
-                <form method="POST">
-                    <label for="question_text">Question:</label>
-                    <input type="text" name="question_text" class="input-field" required>
-
-                    <label for="option_a">Option A:</label>
-                    <input type="text" name="option_a" class="input-field" required>
-
-                    <label for="option_b">Option B:</label>
-                    <input type="text" name="option_b" class="input-field" required>
-
-                    <label for="option_c">Option C:</label>
-                    <input type="text" name="option_c" class="input-field" required>
-
-                    <label for="correct_option">Correct Option (a/b/c):</label>
-                    <input type="text" name="correct_option" class="input-field" maxlength="1" required>
-
-                    <div class="button-container">
-                        <button type="submit" class="submit-button">Add Question</button>
+        <div class="row g-5">
+            <!-- Add Question Form -->
+            <div class="col-lg-6">
+                <div class="card form-card">
+                    <div class="card-header form-header">Add Pre-Test Question</div>
+                    <div class="card-body form-body">
+                        <form method="POST">
+                            <div class="mb-3">
+                                <label for="question_text" class="form-label fw-bold">Question:</label>
+                                <input type="text" name="question_text" class="form-control" placeholder="Enter the question" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="option_a" class="form-label fw-bold">Option A:</label>
+                                <input type="text" name="option_a" class="form-control" placeholder="Enter option A" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="option_b" class="form-label fw-bold">Option B:</label>
+                                <input type="text" name="option_b" class="form-control" placeholder="Enter option B" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="option_c" class="form-label fw-bold">Option C:</label>
+                                <input type="text" name="option_c" class="form-control" placeholder="Enter option C" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="correct_option" class="form-label fw-bold">Correct Option (a/b/c):</label>
+                                <input type="text" name="correct_option" class="form-control" maxlength="1" placeholder="Enter the correct option (a/b/c)" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Add Question</button>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
 
-            <div class="existing-questions">
-                <h2 class="section-title">EXISTING PRE-TEST QUESTIONS</h2>
-                <ul class="question-list">
-                    <?php while ($row = $result->fetch_assoc()): ?>
-                        <li class="question-item">
-                            <span class="question-text"><?php echo htmlspecialchars($row['question_text']); ?></span>
-                            <span class="correct-answer">Correct Answer: <?php echo strtoupper(htmlspecialchars($row['correct_option'])); ?></span>
-                        </li>
-                    <?php endwhile; ?>
-                </ul>
+            <!-- Existing Questions -->
+            <div class="col-lg-6">
+                <div class="card existing-card">
+                    <div class="card-header existing-header">Existing Pre-Test Questions</div>
+                    <div class="card-body existing-body">
+                        <table class="table table-striped table-bordered">
+                            <thead class="table-success">
+                                <tr>
+                                    <th class="question-column">Question</th>
+                                    <th class="answer-column">Answer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php while ($row = $result->fetch_assoc()): ?>
+                                    <tr>
+                                        <td class="question-text"><?php echo htmlspecialchars($row['question_text']); ?></td>
+                                        <td class="text-center">
+                                            <span class="answer-badge"><?php echo strtoupper(htmlspecialchars($row['correct_option'])); ?></span>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const toggleButton = document.getElementById("toggle-sidebar");
-            const sidebar = document.getElementById("sidebar");
-            const content = document.getElementById("content");
-
-            toggleButton.addEventListener("click", function () {
-                sidebar.classList.toggle("collapsed");
-                content.classList.toggle("collapsed");
-            });
-        });
+        setTimeout(() => {
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            if (successMessage) successMessage.style.display = 'none';
+            if (errorMessage) errorMessage.style.display = 'none';
+        }, 3000);
     </script>
 </body>
 

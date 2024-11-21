@@ -1,189 +1,152 @@
-/* General body styling */
+/* General Layout */
 body {
+    background-color: #f8f9fa;
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5; /* Light background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    overflow: hidden;
+    position: relative; /* For absolute positioning of messages */
 }
 
-/* Full-width navigation bar */
-.navbar {
-    width: 100vw;
-    background-color: #B19CD9; /* Light purple */
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    box-sizing: border-box;
-}
-
-/* Logo and Name on the left */
-.navbar .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-    text-decoration: none;
-}
-
-/* Hover effect for the logo */
-.navbar .logo:hover {
-    color: #ddd;
-}
-
-/* Navigation links */
-.navbar .nav-links {
-    display: flex;
-    gap: 15px;
-}
-
-.navbar .nav-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-}
-
-.navbar .nav-links a:hover {
-    color: #ddd;
-}
-
-/* Logout button styling */
-.navbar .logout {
-    background-color: #C96A6A; /* Red */
-    padding: 8px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    color: white;
-    font-size: 14px;
-}
-
-.navbar .logout:hover {
-    background-color: #d32f2f; /* Darker red */
-}
-
-/* Style for the header */
-h1 {
-    color: #B19CD9; /* Green */
-    margin-top: 30px;
-    font-size: 2.5rem;
-    text-align: center;
-    margin-left: 25px;
-}
-
-/* Container for the form */
-.form-container {
-    max-width: 600px;
+.container {
+    padding: 40px 20px;
+    max-width: 800px; /* Increase max-width for wider layout */
     width: 100%;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 110px !important; /* Adjust this value to move the form lower */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin: auto;
     text-align: center;
 }
 
-/* Success and error messages */
-.success-message, .error-message {
-    font-size: 1rem;
-    position: fixed; /* Keeps it fixed within the viewport */
-    top: 85px; /* Position it at the bottom of the viewport */
+.page-title {
+    color: #007bff;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+/* Messages */
+.messages {
+    position: absolute; /* Position the messages above the form */
+    top: 115px; /* Adjust vertical position */
     left: 50%;
     transform: translateX(-50%); /* Center horizontally */
-    padding: 10px 20px;
-    border-radius: 5px;
-    z-index: 10; /* Ensure it stays above other elements */
-    opacity: 1; /* Set initial opacity */
-    transition: opacity 0.3s ease; /* Smooth fade-out effect */
+    text-align: center;
+    z-index: 10; /* Ensure messages are above other elements */
 }
 
-.success-message {
-    color: #28a745; /* Green */
+.alert {
+    display: inline-block; /* Wrap to fit content */
+    padding: 10px 20px; /* Add padding for readability */
+    border-radius: 5px; /* Rounded corners */
+    margin: 5px 0; /* Add spacing between messages */
+    text-align: center; /* Center the text inside */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
 }
 
-.error-message {
-    color: #dc3545; /* Red */
+/* Form Container */
+.form-container {
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left; /* Align text inside the form */
+    margin: auto;
+    max-width: 850px; /* Increase the width of the form */
 }
 
-.course-form {
-    margin-top: 20px !important;
-}
-
-/* Textarea styling */
-textarea {
-    width: 100%;
-    height: 250px;
-    padding: 15px;
-    font-size: 1rem;
-    font-family: Arial, sans-serif;
-    border: 2px solid #B19CD9; /* Light purple border */
-    border-radius: 5px;
-    resize: none;
-    margin-bottom: 10px;
-    margin-top: 30px;
-}
-
-textarea:focus {
-    outline: none;
-    border-color: #A877B3; /* Slightly darker purple on focus */
-}
-
-/* Button styling */
-button {
-    background-color: #C96A6A; /* Button color for Save and Back */
-    color: white;
-    font-size: 1rem;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.1s;
-}
-
-button:hover {
-    background-color:  #a84545;
-    transform: scale(1.05);
-}
-
-button:active {
-    transform: scale(0.95);
-}
-
-/* Container for buttons */
-.button-container {
+.form-buttons {
     display: flex;
+    justify-content: center;
     gap: 10px;
-    justify-content: flex-end; /* Align buttons to the right */
-    width: 100%; /* Make the container take full width of form */
-    margin-top: 5px; /* Add margin on top to create more space below the form */
-    margin-left: 20px;
 }
 
-/* Media queries for mobile responsiveness */
-@media (max-width: 768px) {
-    .form-container, .navbar {
-        width: 100%;
-    }
-
-    h1 {
-        font-size: 1.8rem;
-    }
+textarea.form-control {
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    resize: none; /* Prevents manual resizing */
+    padding: 10px; /* Increases padding for readability */
+    font-size: 1rem; /* Sets font size */
+    width: 100%; /* Keeps it responsive */
+    max-width: 1200px; /* Sets a longer maximum width */
+    min-height: 300px; /* Sets a larger minimum height */
+    margin: 0 auto; /* Centers it within the container */
 }
 
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.5rem;
-    }
+.form-container {
+    width: 130%; /* Make the container larger */
+    max-width: 1500px; /* Limit the container's maximum width */
+    margin: 0 auto; /* Center the container */
+    right: -20px;
+}
 
-    button {
-        font-size: 0.9rem;
-        padding: 8px 16px;
-    }
+textarea.form-control {
+    width: 90%; /* Make the textarea smaller than the container */
+    max-width: 1200px; /* Set a maximum width */
+    margin: 0 auto; /* Center the textarea within the container */
+    right: 20px;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 0; /* Initially hidden */
+    background: linear-gradient(180deg, #B19CD9, #C96A6A);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    z-index: 2;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+    border-right: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.sidebar.expanded {
+    width: 250px; /* Sidebar expands to 250px */
+}
+
+/* Toggle Button Styling */
+.sidebar-toggle {
+    position: fixed;
+    top: 15px;
+    left: 0;
+    background-color: #B19CD9;
+    border-radius: 0 50% 50% 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: left 0.3s ease;
+    z-index: 3;
+}
+
+.sidebar-toggle::before {
+    content: '❯';
+    font-size: 20px;
+    color: white;
+}
+
+.sidebar.expanded + .sidebar-toggle {
+    left: 250px;
+}
+
+.sidebar.expanded + .sidebar-toggle::before {
+    content: '❮';
+}
+
+/* Content Area */
+.content {
+    margin-left: 0; /* Default position when sidebar is closed */
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+.content.shifted {
+    margin-left: 250px; /* Shifts content when sidebar is open */
 }
