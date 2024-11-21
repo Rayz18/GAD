@@ -13,7 +13,7 @@ if (!isset($_SESSION['learner_id'])) {
 $program_id = $_GET['program_id'];
 
 // Fetch approved program details using the program_id
-$program_query = $conn->query("SELECT * FROM `programs` WHERE `program_id` = '$program_id' AND `status` = 'approved'");
+$program_query = $conn->query("SELECT * FROM programs WHERE program_id = '$program_id' AND status = 'approved'");
 $program = $program_query->fetch_assoc();
 
 if (!$program) {
@@ -46,7 +46,7 @@ if (!$program) {
         <!-- Display courses related to the program -->
         <?php
         // Fetch approved courses associated with the program_id
-        $query = $conn->query("SELECT * FROM `courses` WHERE `program_id` = '$program_id' AND `status` = 'approved'");
+        $query = $conn->query("SELECT * FROM courses WHERE program_id = '$program_id' AND status = 'approved'");
 
         // Loop through each course and display it
         if ($query->num_rows > 0) {
