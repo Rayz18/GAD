@@ -12,22 +12,18 @@ try {
 
     $field_id = $data['field_id'];
 
-    $conn->autocommit(false); // Begin transaction
-
     // Prepare the delete statement
-    $stmt = $conn->prepare("DELETE FROM seminar_fields WHERE field_id = ?");
+    $stmt = $conn->prepare("DELETE FROM evaluation_fields WHERE field_id = ?");
     if (!$stmt) {
-        throw new Exception("Failed to prepare statement: " . $conn->error);
+        throw new Exception("Failed to prepare statement.");
     }
 
     $stmt->bind_param("i", $field_id);
 
     if ($stmt->execute()) {
-        $conn->commit(); // Commit changes
         echo json_encode(['success' => true, 'message' => 'Field deleted successfully.']);
     } else {
-        $conn->rollback(); // Rollback on failure
-        throw new Exception("Error executing delete query: " . $stmt->error);
+        throw new Exception("Error executing delete query.");
     }
 
     $stmt->close();
