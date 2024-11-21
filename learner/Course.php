@@ -12,21 +12,13 @@ if (!isset($_SESSION['learner_id'])) {
 $program_id = $_GET['program_id'];
 $learner_id = $_SESSION['learner_id'];
 
-// Fetch program details using the program_id
-$program_query = $conn->query("SELECT * FROM programs WHERE program_id='$program_id'");
+// Fetch approved program details using the program_id
+$program_query = $conn->query("SELECT * FROM `programs` WHERE `program_id` = '$program_id' AND `status` = 'approved'");
 $program = $program_query->fetch_assoc();
 
-// Handle enrollment/unenrollment
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
-    $course_id = $_POST['course_id'];
-
-    if ($_POST['action'] === 'enroll') {
-        // Enroll learner in the course
-        $conn->query("INSERT INTO enrollments (learner_id, course_id) VALUES ('$learner_id', '$course_id')");
-    } elseif ($_POST['action'] === 'unenroll') {
-        // Unenroll learner from the course
-        $conn->query("DELETE FROM enrollments WHERE learner_id='$learner_id' AND course_id='$course_id'");
-    }
+if (!$program) {
+    echo "Program not found or not approved.";
+    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -35,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $program['program_name']; ?> - Learner Interface</title>
+    <title><?php echo htmlspecialchars($program['program_name']); ?> - Learner Interface</title> <!-- Dynamic Title -->
     <link rel="stylesheet" href="../learner/assets/common/css/LearnerNavBar.css">
     <link rel="stylesheet" href="../learner/assets/css/Course.css">
 </head>
@@ -44,49 +36,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     <?php include '../learner/assets/common/LearnerNavBar.php'; ?>
 
     <div class="title-section">
-        <h1><?php echo $program['program_name']; ?></h1>
+        <h1><?php echo htmlspecialchars($program['program_name']); ?></h1>
+        <!-- Dynamic Program Name in Title Section -->
     </div>
 
     <div class="courses-container">
         <?php
-        $query = $conn->query("SELECT * FROM courses WHERE program_id='$program_id'");
+        // Fetch approved courses associated with the program_id
+        $query = $conn->query("SELECT * FROM `courses` WHERE `program_id` = '$program_id' AND `status` = 'approved'");
 
-        while ($course = $query->fetch_array()) {
-            // Check if the learner is enrolled in the course
-            $enrollment_query = $conn->query("SELECT * FROM enrollments WHERE learner_id='$learner_id' AND course_id='{$course['course_id']}'");
-            $is_enrolled = $enrollment_query->num_rows > 0;
-            ?>
-            <div class="course-card">
-                <div class="course-header">
-                    <p class="course-date"><?php echo $course['course_date']; ?></p>
-                    <?php if ($is_enrolled): ?>
-                        <form method="POST" class="enroll-form">
-                            <input type="hidden" name="course_id" value="<?php echo $course['course_id']; ?>">
-                            <button type="submit" name="action" value="unenroll" class="unenroll-button">Unenroll</button>
-                        </form>
-                    <?php else: ?>
-                        <form method="POST" class="enroll-form">
-                            <input type="hidden" name="course_id" value="<?php echo $course['course_id']; ?>">
-                            <button type="submit" name="action" value="enroll" class="enroll-button">Enroll</button>
-                        </form>
-                    <?php endif; ?>
-                </div>
-                <div class="course-image">
-                    <img src="../staff/upload/<?php echo $course['course_img']; ?>"
-                        alt="<?php echo $course['course_name']; ?> Image">
-                </div>
-                <div class="course-description">
-                    <h2><?php echo $course['course_name']; ?></h2>
-                    <p class="course-text"><?php echo $course['course_desc']; ?></p>
-                    <?php if ($is_enrolled): ?>
+        // Loop through each course and display it
+        if ($query->num_rows > 0) {
+            while ($course = $query->fetch_assoc()) {
+                ?>
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="../staff/upload/<?php echo htmlspecialchars($course['course_img']); ?>"
+                            alt="<?php echo htmlspecialchars($course['course_name']); ?> Image">
+                    </div>
+                    <div class="course-description">
+                        <div class="course-header">
+                            <h2><?php echo htmlspecialchars($course['course_name']); ?></h2>
+                        </div>
+                        <p class="course-text"><?php echo htmlspecialchars($course['course_desc']); ?></p>
                         <div class="view-course">
                             <a href="../learner/CourseContent.php?course_id=<?php echo $course['course_id']; ?>"
-                                class="button">View Course</a>
+                                class="button">View
+                                Course</a>
                         </div>
-                    <?php endif; ?>
+                        <p class="course-date"><?php echo htmlspecialchars($course['course_date']); ?></p>
+                    </div>
                 </div>
-            </div>
-        <?php } ?>
+                <?php
+            }
+        } else {
+            echo "<p>No approved courses available for this program.</p>";
+        }
+        ?>
     </div>
 </body>
 

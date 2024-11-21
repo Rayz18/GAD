@@ -26,11 +26,12 @@ html, body {
     font-size: 2rem;
     font-weight: bold;
     color: #6b46c1;
+    margin: 0;
 }
 
 .courses-container {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     gap: 1.5rem; /* Space between the courses */
     padding: 2rem;
     background-color: #b19cd93d;
@@ -41,85 +42,105 @@ html, body {
 }
 
 .course-card {
-    width: 100%; /* Full width within the container */
-    max-width: 900px;
     display: flex;
+    flex-direction: row; /* Ensure image and text are side by side */
+    gap: 1rem;
     background-color: #fff;
     padding: 1.5rem;
     border-radius: 0.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin: 0 auto; /* Center the course cards */
-    flex-direction: row; /* Ensure image and text are side by side */
-    gap: 1rem;
-    position: relative;
-}
-
-/* Top-left corner layout for date and enroll/unenroll button */
-.course-header {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.course-date {
-    color: #a0aec0;
-    font-size: 0.9rem;
-}
-
-.enroll-button,
-.unenroll-button {
-    background-color: #6b46c1;
-    color: #fff;
-    padding: 0.3rem 0.6rem;
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    font-size: 0.8rem;
-    transition: background-color 0.3s;
-    width: auto;
-}
-
-.enroll-button:hover,
-.unenroll-button:hover {
-    background-color: #4a357c;
+    position: relative; /* For absolute positioning of date and buttons */
+    overflow: hidden;
 }
 
 .course-image img {
-    width: 200px;
+    width: 200px; /* Fixed width for the image */
     height: 300px;
     border-radius: 0.5rem;
+    object-fit: cover; /* Ensures the image fits within the container */
 }
 
 .course-description {
-    flex: 1;
-    padding-left: 1rem;
+    flex: 1; /* Make the text fill the remaining space */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.course-description h2 {
+.course-header h2 {
     font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0 0 0.5rem 0;
 }
 
 .course-text {
-    font-size: 0.9rem;
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+    overflow-wrap: break-word; /* Break long words */
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal; /* Allow text wrapping */
     margin-bottom: 1rem;
 }
 
+.course-date {
+    font-size: 0.9rem;
+    color: #a0aec0;
+    margin-top: 1rem;
+    text-align: right;
+}
+
+/* View Course Button */
 .view-course {
     margin-top: 1rem;
 }
 
 .view-course .button {
+    display: inline-block;
     padding: 0.5rem 1rem;
     background-color: #6b46c1;
     color: #fff;
     border-radius: 0.25rem;
     text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
 }
 
 .view-course .button:hover {
     background-color: #4a357c;
+}
+
+/* Enroll/Unenroll Links */
+.unenroll-link,
+.enroll-link {
+    font-size: 0.9rem;
+    color: #6b46c1;
+    text-decoration: none;
+    font-weight: bold;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    transition: color 0.3s ease;
+}
+
+.unenroll-link:hover,
+.enroll-link:hover {
+    color: #4a357c;
+}
+
+/* Customize scrollbar */
+::-webkit-scrollbar {
+    width: 6px; /* Set scrollbar width */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #cac5d35d; /* Scrollbar color */
+    border-radius: 6px; /* Rounded scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f4f4f4; /* Scrollbar track color */
 }
