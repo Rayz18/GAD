@@ -1,193 +1,152 @@
-/* General body styling */
+/* General Layout */
 body {
+    background-color: #f8f9fa;
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5; /* Light background */
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-}
-
-/* Heading style */
-.col-lg-9.col-md-8 {
-    color: #9373b9 !important; /* Bootstrap primary color */
-    font-size: 3.5rem;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-h1 {
-    font-size: 2.8rem;
-    font-weight: 600 !important; /* Make the text bolder */
-    text-align: center;
-}
-
-/* Alert messages (Overlay Style) */
-.alert {
-    display: inline-block;
-    position: absolute; /* Position the message absolutely */
-    top: 80px; /* Position relative to the container */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Adjust for centering */
-    z-index: 100; /* Ensure it overlays above other elements */
-    font-size: 1rem;
-    padding: 5px 10px;
-    border-radius: 5px;
-    text-align: center;
-    white-space: nowrap; /* Prevent text wrapping */
-}
-
-/* Success message styling */
-.alert-success {
-    background-color: #e6f9ec; /* Light green background */
-    color: #28a745; /* Green text */
-}
-
-/* Error message styling */
-.alert-danger {
-    background-color: #fdecea; /* Light red background */
-    color: #dc3545; /* Red text */
-}
-
-/* Adjust form styling for spacing */
-form {
-    margin-top: 50px; /* Add space between messages and form */
-}
-
-textarea.form-control.border-3 {
-    border: 2px solid #9e3de3; /* Dark Purple */
-    border-radius: 8px; /* Smooth rounded corners */
-    padding: 12px; /* Add spacing inside the textarea */
-    box-shadow: none; /* Remove any additional shadow if undesired */
-    background-color: #ffffff; /* Ensure a clean white background */
-    color: #333; /* Neutral text color */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
-}
-
-textarea.form-control.border-3:focus {
-    border-color: #c786f6; /* Slightly lighter purple on focus */
-    box-shadow: 0 0 10px rgba(75, 0, 130, 0.4); /* Add a subtle glow on focus */
-}
-
-/* Button container */
-.d-flex.justify-content-end.gap-2 {
-    margin-top: 20px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    position: relative; /* For absolute positioning of messages */
+}
+
+.container {
+    padding: 40px 20px;
+    max-width: 800px; /* Increase max-width for wider layout */
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+.page-title {
+    color: #007bff;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+/* Messages */
+.messages {
+    position: absolute; /* Position the messages above the form */
+    top: 115px; /* Adjust vertical position */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    text-align: center;
+    z-index: 10; /* Ensure messages are above other elements */
+}
+
+.alert {
+    display: inline-block; /* Wrap to fit content */
+    padding: 10px 20px; /* Add padding for readability */
+    border-radius: 5px; /* Rounded corners */
+    margin: 5px 0; /* Add spacing between messages */
+    text-align: center; /* Center the text inside */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+/* Form Container */
+.form-container {
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left; /* Align text inside the form */
+    margin: auto;
+    max-width: 850px; /* Increase the width of the form */
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: center;
     gap: 10px;
 }
 
-/* Buttons */
-button {
-    font-size: 1rem;
-    padding: 10px 20px;
+textarea.form-control {
+    border: 2px solid #007bff;
     border-radius: 5px;
-    border: none;
-    transition: background-color 0.3s, transform 0.2s;
-    cursor: pointer;
+    resize: none; /* Prevents manual resizing */
+    padding: 10px; /* Increases padding for readability */
+    font-size: 1rem; /* Sets font size */
+    width: 100%; /* Keeps it responsive */
+    max-width: 1200px; /* Sets a longer maximum width */
+    min-height: 300px; /* Sets a larger minimum height */
+    margin: 0 auto; /* Centers it within the container */
 }
 
-button.btn-primary {
-    background-color: #007bff;
-    color: #ffffff;
+.form-container {
+    width: 130%; /* Make the container larger */
+    max-width: 1500px; /* Limit the container's maximum width */
+    margin: 0 auto; /* Center the container */
+    right: -20px;
 }
 
-button.btn-primary:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-}
-
-button.btn-secondary {
-    background-color: #6c757d;
-    color: #ffffff;
-}
-
-button.btn-secondary:hover {
-    background-color: #5a6268;
-    transform: translateY(-2px);
+textarea.form-control {
+    width: 90%; /* Make the textarea smaller than the container */
+    max-width: 1200px; /* Set a maximum width */
+    margin: 0 auto; /* Center the textarea within the container */
+    right: 20px;
 }
 
 /* Sidebar Styling */
 .sidebar {
-    background-color: #ffffff;
-    border-right: 1px solid #dee2e6;
-    min-height: 100vh;
-    width: 250px; /* Default expanded width */
-    transition: width 0.3s ease; /* Smooth transition */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 0; /* Initially hidden */
+    background: linear-gradient(180deg, #B19CD9, #C96A6A);
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000;
-    overflow: hidden; /* Hide overflowing content when collapsed */
+    height: 100vh;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    z-index: 2;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+    border-right: 2px solid rgba(0, 0, 0, 0.1);
 }
 
-/* Collapsed sidebar */
-.sidebar.collapsed {
-    width: 50px; /* Width when collapsed */
+.sidebar.expanded {
+    width: 250px; /* Sidebar expands to 250px */
+}
+
+/* Toggle Button Styling */
+.sidebar-toggle {
+    position: fixed;
+    top: 15px;
+    left: 0;
+    background-color: #B19CD9;
+    border-radius: 0 50% 50% 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: left 0.3s ease;
+    z-index: 3;
+}
+
+.sidebar-toggle::before {
+    content: '❯';
+    font-size: 20px;
+    color: white;
+}
+
+.sidebar.expanded + .sidebar-toggle {
+    left: 250px;
+}
+
+.sidebar.expanded + .sidebar-toggle::before {
+    content: '❮';
 }
 
 /* Content Area */
 .content {
-    margin-left: 250px; /* Default margin to align with the full sidebar width */
-    transition: margin-left 0.3s ease; /* Smooth transition */
+    margin-left: 0; /* Default position when sidebar is closed */
     padding: 20px;
+    transition: margin-left 0.3s ease;
 }
 
-/* Content when sidebar is collapsed */
-.sidebar.collapsed ~ .content {
-    margin-left: 50px; /* Adjust margin for collapsed sidebar */
-}
-
-/* Sidebar toggle button */
-#toggle-sidebar {
-    position: absolute;
-    top: 10px;
-    left: 10px; /* Position it within the sidebar */
-    z-index: 200; /* Ensure it's above everything */
-    background-color: #6c757d;
-    color: #ffffff;
-    border: none;
-    padding: 8px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-/* Hover effect for toggle button */
-#toggle-sidebar:hover {
-    background-color: #5a6268;
-}
-
-/* Sidebar content visibility */
-.sidebar.collapsed .sidebar-content {
-    display: none; /* Hide content when collapsed */
-}
-
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 1.8rem;
-    }
-
-    textarea {
-        height: 150px;
-    }
-
-    button {
-        font-size: 0.9rem;
-        padding: 8px 16px;
-    }
-}
-
-@media (max-width: 576px) {
-    h1 {
-        font-size: 1.5rem;
-    }
-
-    textarea {
-        height: 100px;
-    }
+.content.shifted {
+    margin-left: 250px; /* Shifts content when sidebar is open */
 }

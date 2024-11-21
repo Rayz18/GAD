@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             const input = document.createElement('input');
             input.type = 'text';
             input.className = 'form-control me-2';
-            input.placeholder = Option ${choicesContainer.children.length + 1};
+            input.placeholder = 'Option ${choicesContainer.children.length + 1}';
 
             const removeButton = document.createElement('button');
             removeButton.type = 'button';

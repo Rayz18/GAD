@@ -74,6 +74,11 @@ $instructions_stmt->close();
     </style>
 </head>
 
+<!-- Back Button -->
+<a href="javascript:history.back()" class="btn btn-outline-secondary back-button">
+        <i class="fas fa-arrow-left me-2"></i>Back
+    </a>
+
 <body class="bg-light py-5 d-flex justify-content-center">
     <div class="bg-white p-4 rounded shadow w-100" style="max-width: 800px;">
         <h1 class="text-center fs-3 fw-bold mb-4">Registration Form</h1>

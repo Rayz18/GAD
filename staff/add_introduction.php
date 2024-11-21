@@ -5,11 +5,13 @@ session_start();
 // Check if staff is logged in
 if (!isset($_SESSION['staff_logged_in'])) {
     header('Location: staff_login.php');
-    exit();  
+    exit();
 }
 
 $course_id = $_GET['course_id'] ?? null;
 $referrer = $_GET['ref'] ?? 'manage_programs.php'; // Default to manage_programs.php if ref is not set
+$success_message = '';
+$error_message = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['save'])) {
     $section_content = $_POST['section_content'];
@@ -51,7 +53,6 @@ $stmt->bind_param("i", $course_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $current_intro = $result->fetch_assoc()['section_content'] ?? '';
-
 ?>
 
 <!DOCTYPE html>
@@ -59,79 +60,83 @@ $current_intro = $result->fetch_assoc()['section_content'] ?? '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Introduction</title>
+    <title>Edit Course Introduction</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../staff/assets/css/add_course_section.css?v=1.0">
     <link rel="stylesheet" href="../staff/assets/common/css/StaffNavBar.css">
-    <link rel="stylesheet" href="../staff/assets/common/css/sidebar.css">
+    <link rel="stylesheet" href="../staff/assets/css/add_course_section.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../staff/assets/common/js/sidebarToggle.js" defer></script>
 </head>
 
-<body class="bg-light">
-    <div class="sidebar">
+<body>
     <?php include '../staff/assets/common/StaffNavBar.php'; ?>
-</div>
 
-<div class="content">
-    <div class="col-lg-9 col-md-8 position-relative">
-        <h1>EDIT COURSE INTRODUCTION</h1>
+    <div class="layout">
+        <!-- Sidebar -->
+        <div id="toggle-sidebar" class="toggle-sidebar">
+            <!-- Sidebar content can go here -->
+        </div>
 
-        <?php if (isset($success_message)): ?>
-            <div class="alert alert-success" role="alert">
-                <?php echo $success_message; ?>
+        <!-- Main Content -->
+        <div id="content" class="content">
+            <!-- Toggle Sidebar Icon -->
+            <div id="toggle-sidebar" class="toggle-sidebar"></div>
+            <h1 class="page-title">EDIT COURSE INTRODUCTION</h1>
+            
+            <!-- Success/Error Messages -->
+            <div class="messages">
+                <?php if (!empty($success_message)): ?>
+                    <div class="alert alert-success"><?php echo $success_message; ?></div>
+                <?php endif; ?>
+                <?php if (!empty($error_message)): ?>
+                    <div class="alert alert-danger"><?php echo $error_message; ?></div>
+                <?php endif; ?>
             </div>
-        <?php endif; ?>
 
-        <?php if (isset($error_message)): ?>
-            <div class="alert alert-danger" role="alert">
-                <?php echo $error_message; ?>
-            </div>
-        <?php endif; ?>
-
-        <form method="POST" class="bg-white shadow-sm rounded p-4">
-            <div class="mb-3">
-                <textarea name="section_content" id="section_content" class="form-control border-3 shadow-none" rows="12"><?php echo htmlspecialchars($current_intro); ?></textarea>
-            </div>
-            <div class="d-flex justify-content-end gap-2">
-                <button type="submit" name="save" class="btn btn-primary">Save Introduction</button>
-                <button type="submit" name="back" class="btn btn-secondary">Back</button>
-            </div>
-            <input type="hidden" name="referrer" value="<?php echo htmlspecialchars($referrer); ?>">
-        </form>
+            <form method="POST" class="form-container">
+    <div class="mb-3">
+        <textarea 
+            name="section_content" 
+            id="section_content" 
+            class="form-control" 
+            rows="12" 
+            style="width: 100%; max-width: 1200px;"><?php echo htmlspecialchars($current_intro); ?></textarea>
     </div>
-</div>
-
+    <div class="form-buttons">
+        <button type="submit" name="save" class="btn btn-primary">Save Introduction</button>
+        <button type="submit" name="back" class="btn btn-secondary">Back</button>
+        <input type="hidden" name="referrer" value="<?php echo htmlspecialchars($referrer); ?>">
     </div>
+</form>
 
-    <script>
-       document.addEventListener("DOMContentLoaded", function () {
-    // Select the toggle button and relevant elements
-    const toggleButton = document.querySelector("#toggle-sidebar");
-    const sidebar = document.querySelector(".sidebar");
-    const content = document.querySelector(".content");
+        <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const successMessage = document.querySelector(".alert-success");
+        const errorMessage = document.querySelector(".alert-danger");
 
-    // Add click event listener to the toggle button
-    toggleButton.addEventListener("click", function () {
-        sidebar.classList.toggle("collapsed"); // Add/remove 'collapsed' class
-        content.classList.toggle("content-collapsed"); // Adjust content layout
+        setTimeout(() => {
+            if (successMessage) successMessage.style.display = "none";
+            if (errorMessage) errorMessage.style.display = "none";
+        }, 3000);
     });
-});
 
-        setTimeout(function() {
-            const successMessage = document.querySelector(".alert-success");
-            const errorMessage = document.querySelector(".alert-danger");
+    document.addEventListener("DOMContentLoaded", function () {
+        const sidebar = document.getElementById("sidebar");
+        const content = document.getElementById("content");
+        const toggleButton = document.getElementById("toggle-sidebar");
 
-            if (successMessage) {
-                successMessage.style.opacity = "0"; // Start fade-out
-                setTimeout(() => successMessage.style.display = "none", 300); // Hide after fade-out
+        toggleButton.addEventListener("click", function () {
+            if (sidebar.classList.contains("open")) {
+                // Close the sidebar
+                sidebar.classList.remove("open");
+                content.classList.remove("shifted");
+            } else {
+                // Open the sidebar
+                sidebar.classList.add("open");
+                content.classList.add("shifted");
             }
-            if (errorMessage) {
-                errorMessage.style.opacity = "0"; // Start fade-out
-                setTimeout(() => errorMessage.style.display = "none", 300); // Hide after fade-out
-            }
-        }, 3000); // 3000 milliseconds = 3 seconds
-    </script>
+        });
+    });
+</script>
 </body>
 </html>
-

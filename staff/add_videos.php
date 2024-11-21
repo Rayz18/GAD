@@ -36,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['video_file'])) {
     }
 }
 
+// Fetch existing videos
 $query = "SELECT * FROM course_videos WHERE course_id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $course_id);
@@ -50,81 +51,93 @@ $result = $stmt->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Videos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../staff/assets/css/add_videos.css">
     <link rel="stylesheet" href="../staff/assets/common/css/StaffNavBar.css">
-    <link rel="stylesheet" href="../staff/assets/common/css/sidebar.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../staff/assets/common/js/sidebarToggle.js" defer></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            setTimeout(function () {
-                const successMessage = document.querySelector(".video-success-message");
-                const errorMessage = document.querySelector(".video-error-message");
-                if (successMessage) successMessage.style.display = "none";
-                if (errorMessage) errorMessage.style.display = "none";
-            }, 3000);
-        });
-    </script>
 </head>
 
 <body>
     <?php include '../staff/assets/common/StaffNavBar.php'; ?>
 
-    <div class="sidebar" id="sidebar">
-        <button id="toggle-sidebar" class="sidebar-toggle-button">Toggle Sidebar</button>
-        <ul class="sidebar-menu">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Manage Videos</a></li>
-            <li><a href="#">Settings</a></li>
-        </ul>
+    <!-- Sidebar -->
+    <div class="sidebar collapsed">
+        <!-- Sidebar content -->
     </div>
 
-    <div class="content" id="content">
-        <h1 class="video-title">UPLOAD COURSE VIDEOS</h1>
+    <!-- Sidebar Toggle Button -->
+    <div id="toggle-sidebar" class="toggle-sidebar"></div>
 
-        <?php if ($video_success_message): ?>
-            <p class="video-success-message"><?php echo $video_success_message; ?></p>
-        <?php endif; ?>
-        <?php if ($video_error_message): ?>
-            <p class="video-error-message"><?php echo $video_error_message; ?></p>
-        <?php endif; ?>
+    <!-- Main Content -->
+    <div class="container-fluid main-container">
+        <h1 class="page-title">UPLOAD COURSE VIDEOS</h1>
 
-        <div class="video-container">
-            <div class="video-form-container">
-                <h2 class="video-upload-title">UPLOADING VIDEOS</h2>
-                <form method="POST" enctype="multipart/form-data" class="video-form">
-                    <input type="file" name="video_file" class="video-file-input" accept="video/*" required>
-                    <button type="submit" class="video-upload-button">UPLOAD VIDEO</button>
-                </form>
+        <!-- Success/Error Messages -->
+        <div class="messages">
+            <?php if ($video_success_message): ?>
+                <div id="successMessage" class="alert alert-success">
+                    <?php echo $video_success_message; ?>
+                </div>
+            <?php endif; ?>
+            <?php if ($video_error_message): ?>
+                <div id="errorMessage" class="alert alert-danger">
+                    <?php echo $video_error_message; ?>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <div class="row g-5 align-items-stretch">
+            <!-- Upload Video Form -->
+            <div class="col-lg-6">
+                <div class="card upload-card">
+                    <div class="card-header upload-header">Upload Video</div>
+                    <div class="card-body upload-body">
+                        <form method="POST" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="video_file" class="form-label">File:</label>
+                                <input type="file" name="video_file" class="form-control" accept="video/*" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Upload Video</button>
+                        </form>
+                    </div>
+                </div>
             </div>
 
-            <div class="video-existing-container">
-                <h2 class="video-existing-title">EXISTING UPLOADED VIDEOS</h2>
-                <div class="video-list">
-                    <?php while ($row = $result->fetch_assoc()): ?>
-                        <div class="video-card">
-                            <video controls class="video-preview">
-                                <source src="<?php echo $row['video_path']; ?>" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                            <p class="video-name"><?php echo basename($row['video_path']); ?></p>
+            <!-- Existing Uploaded Videos -->
+            <div class="col-lg-6">
+                <div class="card existing-videos-card">
+                    <div class="card-header existing-videos-header">Existing Uploaded Videos</div>
+                    <div class="card-body existing-videos-body">
+                        <div class="row g-3">
+                            <?php while ($row = $result->fetch_assoc()): ?>
+                                <div class="col-md-6">
+                                    <div class="card video-card">
+                                        <video class="card-img-top" controls>
+                                            <source src="<?php echo $row['video_path']; ?>" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                        <div class="card-body text-center">
+                                            <p class="video-name"><?php echo basename($row['video_path']); ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endwhile; ?>
                         </div>
-                    <?php endwhile; ?>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Auto-hide messages after 3 seconds -->
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const toggleButton = document.getElementById("toggle-sidebar");
-            const sidebar = document.getElementById("sidebar");
-            const content = document.getElementById("content");
-
-            toggleButton.addEventListener("click", function () {
-                sidebar.classList.toggle("collapsed");
-                content.classList.toggle("collapsed");
-            });
-        });
+        setTimeout(() => {
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            if (successMessage) successMessage.style.display = 'none';
+            if (errorMessage) errorMessage.style.display = 'none';
+        }, 3000);
     </script>
 </body>
 
