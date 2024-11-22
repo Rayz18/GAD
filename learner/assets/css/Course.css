@@ -63,33 +63,22 @@ html, body {
     align-items: center;
 }
 
-
-.enroll-actions {
-    position: absolute;
-    bottom: 15px; /* Place below the course date */
-    right: 15px;
-    font-size: 0.9rem;
-}
-
-.enroll-link,
-.unenroll-link {
+/* Ensure enroll link is aligned to the upper right corner */
+.unenroll-link,
+.enroll-link {
     font-size: 0.9rem;
     color: #6b46c1;
     text-decoration: none;
     font-weight: bold;
+    position: absolute;
+    top: 45px;
+    right: 15px;
 }
 
-.enroll-link:hover,
-.unenroll-link:hover {
+/* Add hover effect to enroll/unenroll link */
+.unenroll-link:hover,
+.enroll-link:hover {
     color: #4a357c;
-}
-
-.button.disabled {
-    background-color: #d3d3d3;
-    color: #ffffff;
-    pointer-events: none;
-    opacity: 0.6;
-    text-decoration: none;
 }
 
 /* Adjust the position of the course date */
