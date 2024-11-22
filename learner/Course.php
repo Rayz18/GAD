@@ -46,6 +46,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title><?php echo htmlspecialchars($program['program_name']); ?> - Learner Interface</title>
     <link rel="stylesheet" href="../learner/assets/common/css/LearnerNavBar.css">
     <link rel="stylesheet" href="../learner/assets/css/Course.css">
+    <script>
+        // Confirmation dialog for unenroll button
+        function confirmUnenroll(event) {
+            if (!confirm("Are you sure you want to unenroll from this course?")) {
+                event.preventDefault(); // Prevent form submission if not confirmed
+            }
+        }
+    </script>
 </head>
 
 <body class="bg-light-gray">
@@ -79,16 +87,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <h2><?php echo htmlspecialchars($course['course_name']); ?></h2>
                         <p><?php echo htmlspecialchars($course['course_desc']); ?></p>
                         <p class="course-date"><?php echo htmlspecialchars($course['course_date']); ?></p>
+
+                        <!-- Form moved here -->
                         <form method="POST" style="display: inline;">
                             <input type="hidden" name="course_id" value="<?php echo $course_id; ?>">
                             <?php if ($is_enrolled): ?>
-                                <button type="submit" name="unenroll" class="button unenroll">Unenroll</button>
+                                <button type="submit" name="unenroll" class="button unenroll"
+                                    onclick="confirmUnenroll(event)">Unenroll</button>
                                 <a href="../learner/CourseContent.php?course_id=<?php echo $course_id; ?>"
                                     class="button view-course">View Seminar</a>
                             <?php else: ?>
                                 <button type="submit" name="enroll" class="button enroll">Enroll</button>
                             <?php endif; ?>
                         </form>
+                        <!-- End of moved form -->
                     </div>
                 </div>
                 <?php
