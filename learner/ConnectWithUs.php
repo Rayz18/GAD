@@ -1,191 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connect With Us</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../learner/assets/common/css/LearnerNavBar.css">
-    <link rel="stylesheet" href="../learner/assets/css/ConnectWithUs.css">
 </head>
-
 <body>
     <?php include '../learner/assets/common/LearnerNavBar.php'; ?>
-    <div class="connect-container">
-        <div class="content">
-            <h1 class="title">CONNECT WITH US</h1>
+    </br> 
+    </br> 
+    </br> 
+    <div class="container mt-4">
+        <!-- Connect With Us Title -->
 
-            <section class="location-section">
-                <!-- Alangilan Campus -->
-                <div class="location">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipMgKEy0eNkfBl73aw1UJSrHNUFwUZpyaNo1gk8A=s1360-w1360-h1020"
-                        alt="Batangas State University - Alangilan Campus" />
-                    <div class="location-details">
-                        <h2>BATANGAS STATE UNIVERSITY - ALANGILAN CAMPUS</h2>
-                        <p>Q3MF+JQJ, Batangas</p>
-                        <p><a href="mailto:gad@g.batstate-u.edu.ph">gad@g.batstate-u.edu.ph</a></p>
-                        <h3>Vicinity Map</h3>
-                        <iframe
-                            src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Q3MF+JQJ,%20Batangas+(Batangas%20State%20University%20Alangilan%20campus)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-                            width="800" height="240" style="border: 0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade" title="Alangilan Campus Map"></iframe>
+        <h3 class="text-center text-purple fw-bold mb-4" style="font-size: 24px;">CONNECT WITH US</h3> 
+        <!-- Alangilan Campus -->
+        <div class="card mb-4 shadow-sm border-0" style="background-color: #f8f9fa; border-radius: 8px;">
+            <div class="row g-0 align-items-center">
+                <div class="col-md-4">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipMgKEy0eNkfBl73aw1UJSrHNUFwUZpyaNo1gk8A=s1360-w1360-h1020" 
+                        class="img-fluid rounded-start mb-3 mt-2" 
+                        alt="Alangilan Campus">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary mt-3" style="font-size: 18px;">BATANGAS STATE UNIVERSITY - ALANGILAN CAMPUS</h5>
+                        <p class="card-text mb-1">Q3MF+JQJ, Batangas</p>
+                        <p class="card-text"><a href="mailto:gad@g.batstate-u.edu.ph" class="text-decoration-none text-info">gad@g.batstate-u.edu.ph</a></p>
+                        <h6 class="fw-bold text-secondary mt-4">Vicinity Map</h6>
+                        <iframe src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Q3MF+JQJ,%20Batangas+(Batangas%20State%20University%20Alangilan%20campus)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                            width="100%" height="240" style="border: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Alangilan Campus Map"></iframe>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- Pablo Borbon Campus -->
-                <div class="location">
-                    <img src="https://lh5.googleusercontent.com/p/AF1QipO0R1UqV2DNU9o086db7Il4CYwO5q0HTWDqS6tI=w408-h306-k-no"
-                        alt="Batangas State University - Pablo Borbon" />
-                    <div class="location-details">
-                        <h2>BATANGAS STATE UNIVERSITY - PABLO BORBON</h2>
-                        <p>12 Rizal Ave, Poblacion, Batangas, 4200 Batangas</p>
-                        <p><a href="mailto:gad@g.batstate-u.edu.ph">gad@g.batstate-u.edu.ph</a></p>
-                        <h3>Vicinity Map</h3>
-                        <iframe
-                            src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Batangas%20State%20University%20Pablo%20Borbon%20Main%201+(Batangas%20State%20University%20Pablo%20Borbon)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-                            width="800" height="240" style="border: 0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade" title="Pablo Borbon Campus Map"></iframe>
+        <!-- Pablo Borbon Campus -->
+        <div class="card mb-4 shadow-sm border-0" style="background-color: #f8f9fa; border-radius: 8px;">
+            <div class="row g-0 align-items-center">
+                <div class="col-md-4">
+                    <img src="https://lh5.googleusercontent.com/p/AF1QipO0R1UqV2DNU9o086db7Il4CYwO5q0HTWDqS6tI=w408-h306-k-no" 
+                        class="img-fluid rounded-start mb-3 mt-2" 
+                        alt="Pablo Borbon Campus">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary mt-3" style="font-size: 18px;">BATANGAS STATE UNIVERSITY - PABLO BORBON</h5>
+                        <p class="card-text mb-1">12 Rizal Ave, Poblacion, Batangas, 4200 Batangas</p>
+                        <p class="card-text"><a href="mailto:gad@g.batstate-u.edu.ph" class="text-decoration-none text-info">gad@g.batstate-u.edu.ph</a></p>
+                        <h6 class="fw-bold text-secondary mt-4">Vicinity Map</h6>
+                        <iframe src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Batangas%20State%20University%20Pablo%20Borbon%20Main%201+(Batangas%20State%20University%20Pablo%20Borbon)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                            width="100%" height="240" style="border: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Pablo Borbon Campus Map"></iframe>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- Lipa Campus -->
-                <div class="location">
-                    <img src="https://batstateu.edu.ph/wp-content/smush-webp/2020/10/lipa-slider-1-scaled.jpg.webp"
-                        alt="Batangas State University - Lipa Campus" />
-                    <div class="location-details">
-                        <h2>BATANGAS STATE UNIVERSITY - LIPA CAMPUS</h2>
-                        <p>Lipa City, Batangas</p>
-                        <p><a href="mailto:gad@g.batstate-u.edu.ph">gad@g.batstate-u.edu.ph</a></p>
-                        <h3>Vicinity Map</h3>
-                        <iframe
-                            src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Batangas%20State%20University%20Lipa%20Campus&t=&z=14&ie=UTF8&iwloc=B&output=embed"
-                            width="800" height="240" style="border: 0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade" title="Lipa Campus Map"></iframe>
+        <!-- Lipa Campus -->
+        <div class="card mb-4 shadow-sm border-0" style="background-color: #f8f9fa; border-radius: 8px;">
+            <div class="row g-0 align-items-center">
+                <div class="col-md-4">
+                    <img src="https://batstateu.edu.ph/wp-content/smush-webp/2020/10/lipa-slider-1-scaled.jpg.webp" 
+                        class="img-fluid rounded-start mb-3 mt-2" 
+                        alt="Lipa Campus">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary mt-3" style="font-size: 18px;">BATANGAS STATE UNIVERSITY - LIPA CAMPUS</h5>
+                        <p class="card-text mb-1">Lipa City, Batangas</p>
+                        <p class="card-text"><a href="mailto:gad@g.batstate-u.edu.ph" class="text-decoration-none text-info">gad@g.batstate-u.edu.ph</a></p>
+                        <h6 class="fw-bold text-secondary mt-4">Vicinity Map</h6>
+                        <iframe src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Batangas%20State%20University%20Lipa%20Campus&t=&z=14&ie=UTF8&iwloc=B&output=embed"
+                            width="100%" height="240" style="border: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lipa Campus Map"></iframe>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- Nasugbu Campus -->
-                <div class="location">
-                    <img src="https://lh5.googleusercontent.com/p/AF1QipMu-0shgyaHUHc8YKR5fVDNVeZ3vGW6hnkT5t3y=w408-h306-k-no"
-                        alt="Batangas State University - Nasugbu Campus" />
-                    <div class="location-details">
-                        <h2>BATANGAS STATE UNIVERSITY - NASUGBU CAMPUS</h2>
-                        <p>J.P. Laurel St, Nasugbu, Batangas</p>
-                        <p><a href="mailto:gad@g.batstate-u.edu.ph">gad@g.batstate-u.edu.ph</a></p>
-                        <h3>Vicinity Map</h3>
-                        <iframe
-                            src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Batangas%20State%20University%20Nasugbu%20Campus&t=&z=14&ie=UTF8&iwloc=B&output=embed"
-                            width="800" height="240" style="border: 0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade" title="Nasugbu Campus Map"></iframe>
+        <!-- Nasugbu Campus -->
+        <div class="card mb-4 shadow-sm border-0" style="background-color: #f8f9fa; border-radius: 8px;">
+            <div class="row g-0 align-items-center">
+                <div class="col-md-4">
+                    <img src="https://lh5.googleusercontent.com/p/AF1QipMu-0shgyaHUHc8YKR5fVDNVeZ3vGW6hnkT5t3y=w408-h306-k-no" 
+                        class="img-fluid rounded-start mb-3 mt-2" 
+                        alt="Nasugbu Campus">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary mt-3" style="font-size: 18px;">BATANGAS STATE UNIVERSITY - NASUGBU CAMPUS</h5>
+                        <p class="card-text mb-1">J.P. Laurel St, Nasugbu, Batangas</p>
+                        <p class="card-text"><a href="mailto:gad@g.batstate-u.edu.ph" class="text-decoration-none text-info">gad@g.batstate-u.edu.ph</a></p>
+                        <h6 class="fw-bold text-secondary mt-4">Vicinity Map</h6>
+                        <iframe src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Batangas%20State%20University%20Nasugbu%20Campus&t=&z=14&ie=UTF8&iwloc=B&output=embed"
+                            width="100%" height="240" style="border: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Nasugbu Campus Map"></iframe>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- Malvar Campus -->
-                <div class="location">
-                    <img src="https://batstateu.edu.ph/wp-content/uploads/2020/10/malvar-slider-1.jpg"
-                        alt="Batangas State University - Malvar Campus" />
-                    <div class="location-details">
-                        <h2>BATANGAS STATE UNIVERSITY - MALVAR CAMPUS</h2>
-                        <p>Malvar, Batangas</p>
-                        <p><a href="mailto:gad@g.batstate-u.edu.ph">gad@g.batstate-u.edu.ph</a></p>
-                        <h3>Vicinity Map</h3>
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15466.681876709422!2d121.1544082!3d14.0449448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd6ed9735068d7%3A0x97fd25b226e150e7!2sBatangas%20State%20University%20Jose%20P.%20Laurel%20Polytechnic%20College!5e0!3m2!1sen!2sph!4v1696986776885!5m2!1sen!2sph"
-                            width="800" height="240" style="border: 0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade" title="Malvar Campus Map">
-                        </iframe>
+        <!-- Malvar Campus -->
+        <div class="card mb-4 shadow-sm border-0" style="background-color: #f8f9fa; border-radius: 8px;">
+            <div class="row g-0 align-items-center">
+                <div class="col-md-4">
+                    <img src="https://batstateu.edu.ph/wp-content/uploads/2020/10/malvar-slider-1.jpg" 
+                        class="img-fluid rounded-start mb-3 mt-2" 
+                        alt="Malvar Campus">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary mt-3" style="font-size: 18px;">BATANGAS STATE UNIVERSITY - MALVAR CAMPUS</h5>
+                        <p class="card-text mb-1">Malvar, Batangas</p>
+                        <p class="card-text"><a href="mailto:gad@g.batstate-u.edu.ph" class="text-decoration-none text-info">gad@g.batstate-u.edu.ph</a></p>
+                        <h6 class="fw-bold text-secondary mt-4">Vicinity Map</h6>
+                        <iframe src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Batangas%20State%20University%20Malvar%20Campus&t=&z=14&ie=UTF8&iwloc=B&output=embed"
+                            width="100%" height="240" style="border: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Malvar Campus Map"></iframe>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- San Juan Campus -->
-                <div class="location">
-                    <img src="https://batstateu.edu.ph/wp-content/uploads/2020/10/sanjuan-slider-1.jpg"
-                        alt="Batangas State University - San Juan Campus" />
-                    <div class="location-details">
-                        <h2>BATANGAS STATE UNIVERSITY - SAN JUAN CAMPUS</h2>
-                        <p>San Juan, Batangas</p>
-                        <p><a href="mailto:gad@g.batstate-u.edu.ph">gad@g.batstate-u.edu.ph</a></p>
-                        <h3>Vicinity Map</h3>
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15490.741485742835!2d121.4037188!3d13.8023692!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd3b40000fab91%3A0xdffc5afd9960e94c!2sBatangas%20State%20University%20-%20San%20Juan%20Campus!5e0!3m2!1sen!2sph!4v1696986890992!5m2!1sen!2sph"
-                            width="800" height="240" style="border: 0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade" title="San Juan Campus Map">
-                        </iframe>
+        <!-- Rosario Campus -->
+        <div class="card mb-4 shadow-sm border-0" style="background-color: #f8f9fa; border-radius: 8px;">
+            <div class="row g-0 align-items-center">
+                <div class="col-md-4">
+                    <img src="https://batstateu.edu.ph/wp-content/smush-webp/2021/09/Technology-Building-1-scaled.jpg.webp" 
+                        class="img-fluid rounded-start mb-3 mt-2" 
+                        alt="Rosario Campus">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary mt-3" style="font-size: 18px;">BATANGAS STATE UNIVERSITY - ROSARIO CAMPUS</h5>
+                        <p class="card-text mb-1">Rosario, Batangas</p>
+                        <p class="card-text"><a href="mailto:gad@g.batstate-u.edu.ph" class="text-decoration-none text-info">gad@g.batstate-u.edu.ph</a></p>
+                        <h6 class="fw-bold text-secondary mt-4">Vicinity Map</h6>
+                        <iframe src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Batangas%20State%20University%20Rosario%20Campus&t=&z=14&ie=UTF8&iwloc=B&output=embed"
+                            width="100%" height="240" style="border: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Rosario Campus Map"></iframe>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- Mabini Campus -->
-                <div class="location">
-                    <img src="https://batstateu.edu.ph/wp-content/smush-webp/2024/09/Mabini-Campus-09.19.png.webp"
-                        alt="Batangas State University - Mabini Campus" />
-                    <div class="location-details">
-                        <h2>BATANGAS STATE UNIVERSITY - MABINI CAMPUS</h2>
-                        <p>Mabini, Batangas</p>
-                        <p><a href="mailto:gad@g.batstate-u.edu.ph">gad@g.batstate-u.edu.ph</a></p>
-                        <h3>Vicinity Map</h3>
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15466.76825394933!2d120.936869!3d13.7568508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd074c4a6294dd%3A0x83f6d03b76a3f94d!2sBatangas%20State%20University%20Mabini%20Campus!5e0!3m2!1sen!2sph!4v1696986946743!5m2!1sen!2sph"
-                            width="800" height="240" style="border: 0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade" title="Mabini Campus Map">
-                        </iframe>
+        <!-- Balayan Campus -->
+        <div class="card mb-4 shadow-sm border-0" style="background-color: #f8f9fa; border-radius: 8px;">
+            <div class="row g-0 align-items-center">
+                <div class="col-md-4">
+                    <img src="https://batstateu.edu.ph/wp-content/smush-webp/2020/10/campus-balayan-pic.jpg.webp" 
+                        class="img-fluid rounded-start mb-3 mt-2" 
+                        alt="Balayan Campus">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary mt-3" style="font-size: 18px;">BATANGAS STATE UNIVERSITY - BALAYAN CAMPUS</h5>
+                        <p class="card-text mb-1">Balayan, Batangas</p>
+                        <p class="card-text"><a href="mailto:gad@g.batstate-u.edu.ph" class="text-decoration-none text-info">gad@g.batstate-u.edu.ph</a></p>
+                        <h6 class="fw-bold text-secondary mt-4">Vicinity Map</h6>
+                        <iframe src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Batangas%20State%20University%20Balayan%20Campus&t=&z=14&ie=UTF8&iwloc=B&output=embed"
+                            width="100%" height="240" style="border: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Balayan Campus Map"></iframe>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- Rosario Campus -->
-                <div class="location">
-                    <img src="https://batstateu.edu.ph/wp-content/smush-webp/2021/09/Technology-Building-1-scaled.jpg.webp"
-                        alt="Batangas State University - Rosario Campus" />
-                    <div class="location-details">
-                        <h2>BATANGAS STATE UNIVERSITY - ROSARIO CAMPUS</h2>
-                        <p>Rosario, Batangas</p>
-                        <p><a href="mailto:gad@g.batstate-u.edu.ph">gad@g.batstate-u.edu.ph</a></p>
-                        <h3>Vicinity Map</h3>
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3872.822553109649!2d121.1969645!3d13.8466836!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd1422de49e5c1%3A0x44c226dddd701db8!2sBatangas%20State%20University%20%E2%80%93%20Rosario%20Campus!5e0!3m2!1sen!2sph!4v1696986312787!5m2!1sen!2sph"
-                            width="800" height="240" style="border: 0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade" title="Rosario Campus Map">
-                        </iframe>
+        <!-- Lemery Campus -->
+        <div class="card mb-4 shadow-sm border-0" style="background-color: #f8f9fa; border-radius: 8px;">
+            <div class="row g-0 align-items-center">
+                <div class="col-md-4">
+                    <img src="https://batstateu.edu.ph/wp-content/smush-webp/2020/10/campus-lemery-1.jpg.webp" 
+                        class="img-fluid rounded-start mb-3 mt-2" 
+                        alt="Lemery Campus">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary mt-3" style="font-size: 18px;">BATANGAS STATE UNIVERSITY - LEMERY CAMPUS</h5>
+                        <p class="card-text mb-1">Brgy. Bagong Sikat, Lemery, Batangas</p>
+                        <p class="card-text"><a href="mailto:gad@g.batstate-u.edu.ph" class="text-decoration-none text-info">gad@g.batstate-u.edu.ph</a></p>
+                        <h6 class="fw-bold text-secondary mt-4">Vicinity Map</h6>
+                        <iframe src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Batangas%20State%20University%20Lemery%20Campus&t=&z=14&ie=UTF8&iwloc=B&output=embed"
+                            width="100%" height="240" style="border: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lemery Campus Map"></iframe>
                     </div>
                 </div>
-
-                <!-- Lemery Campus -->
-                <div class="location">
-                    <img src="https://batstateu.edu.ph/wp-content/smush-webp/2020/10/campus-lemery-1.jpg.webp"
-                        alt="Batangas State University - Lemery Campus" />
-                    <div class="location-details">
-                        <h2>BATANGAS STATE UNIVERSITY - LEMERY CAMPUS</h2>
-                        <p>Brgy. Bagong Sikat, Lemery, Batangas</p>
-                        <p><a href="mailto:gad@g.batstate-u.edu.ph">gad@g.batstate-u.edu.ph</a></p>
-                        <h3>Vicinity Map</h3>
-                        <iframe
-                            src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Batangas%20State%20University%20Lemery%20Campus&t=&z=14&ie=UTF8&iwloc=B&output=embed"
-                            width="800" height="240" style="border: 0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade" title="Lemery Campus Map">
-                        </iframe>
-                    </div>
-                </div>
-
-                <!-- Balayan Campus -->
-                <div class="location">
-                    <img src="https://batstateu.edu.ph/wp-content/smush-webp/2020/10/campus-balayan-pic.jpg.webp"
-                        alt="Batangas State University - Balayan Campus" />
-                    <div class="location-details">
-                        <h2>BATANGAS STATE UNIVERSITY - BALAYAN CAMPUS</h2>
-                        <p>Balayan, Batangas</p>
-                        <p><a href="mailto:gad@g.batstate-u.edu.ph">gad@g.batstate-u.edu.ph</a></p>
-                        <h3>Vicinity Map</h3>
-                        <iframe 
-                            src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Batangas%20State%20University%20Balayan%20Campus&t=&z=14&ie=UTF8&iwloc=B&output=embed"
-                            width="800" height="240" style="border: 0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade" title="Balayan Campus Map">
-                        </iframe> 
-                    </div>
-                </div>
-
-            </section>
+            </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
