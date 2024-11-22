@@ -46,10 +46,14 @@ foreach ($content_types as $type => $query) {
         <?php include '../admin/assets/common/AdminNavBar.php'; ?>
         <div class="main-content">
             <div class="content-moderation-container container mt-5">
-                <h1 class="text-center">Content Moderation</h1>
+                <h1 class="text-center">CONTENT MODERATION</h1>
                 <div class="card-container">
                     <?php foreach ($content_data as $type => $count): ?>
-                        <div class="custom-card card text-center mb-4 shadow-sm">
+                        <?php
+                        // Determine the card class based on pending count
+                        $cardClass = $count > 0 ? 'pending' : 'no-pending';
+                        ?>
+                        <div class="custom-card card text-center mb-4 shadow-sm <?php echo $cardClass; ?>">
                             <div class="card-body">
                                 <h5 class="card-title">Pending <?php echo htmlspecialchars($type); ?></h5>
                                 <p class="card-text"><?php echo $count; ?> Pending <?php echo htmlspecialchars($type); ?></p>

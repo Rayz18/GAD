@@ -9,7 +9,8 @@ if (!isset($_SESSION['staff_logged_in']) || $_SESSION['staff_logged_in'] !== tru
 }
 
 // Fetch all programs
-$programs_query = $conn->query("SELECT * FROM programs");
+// Fetch all programs, with the most recent one first
+$programs_query = $conn->query("SELECT * FROM programs ORDER BY created_at DESC");
 
 // Function to truncate program names
 function truncateProgramName($name, $limit = 15)
