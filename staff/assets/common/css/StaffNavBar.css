@@ -91,9 +91,9 @@ html, body {
 .sidebar-title {
     text-align: center;
     color: white;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
-    line-height: .5; /* Adjusted line height for better spacing */
+    line-height: .1; /* Adjusted line height for better spacing */
     padding: 10px 0; /* Adds consistent padding */
     margin: 0;
     white-space: nowrap; /* Prevents text wrapping */
@@ -112,12 +112,12 @@ html, body {
 .menu {
     list-style: none;
     padding: 0;
-    margin-top: 25px;
+    margin-top: 15px;
 }
 
 .menu-item {
     padding: 15px 20px;
-    font-size: 17px;
+    font-size: 14px;
     color: white;
     text-decoration: none;
     display: block;

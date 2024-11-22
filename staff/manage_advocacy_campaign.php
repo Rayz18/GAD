@@ -75,6 +75,7 @@ $campaigns = $conn->query("SELECT * FROM advocacy_campaigns");
     <link rel="stylesheet" href="../staff/assets/common/css/StaffNavBar.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../staff/assets/css/manage_advocacy_campaigns.css">
+    <script src="../staff/assets/common/js/sidebarToggle.js" defer></script>
 </head>
 
 <body>
@@ -99,16 +100,17 @@ $campaigns = $conn->query("SELECT * FROM advocacy_campaigns");
                     <div class="mb-3">
                         <label for="campaign_name" class="form-label">Campaign Name</label>
                         <input type="text" class="form-control shadow-sm" id="campaign_name" name="campaign_name"
-                               value="<?php echo htmlspecialchars($campaign_name); ?>" required>
+                            value="<?php echo htmlspecialchars($campaign_name); ?>" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="campaign_img" class="form-label">Campaign Image</label>
-                        <input type="file" class="form-control shadow-sm" id="campaign_img" name="campaign_img" accept="image/*">
+                        <input type="file" class="form-control shadow-sm" id="campaign_img" name="campaign_img"
+                            accept="image/*">
                         <?php if ($edit_mode && $campaign_img): ?>
                             <div class="mt-3">
                                 <img src="<?php echo htmlspecialchars($campaign_img); ?>" class="rounded border"
-                                     alt="Current Campaign Image" style="max-width: 150px;">
+                                    alt="Current Campaign Image" style="max-width: 150px;">
                             </div>
                         <?php endif; ?>
                     </div>
@@ -139,17 +141,18 @@ $campaigns = $conn->query("SELECT * FROM advocacy_campaigns");
                             <tr>
                                 <td><?php echo htmlspecialchars($campaign['campaign_name']); ?></td>
                                 <td>
-                                    <img src="<?php echo htmlspecialchars($campaign['campaign_img']); ?>" 
-                                         class="img-thumbnail border shadow-sm" alt="Campaign Image" style="max-width: 100px;">
+                                    <img src="<?php echo htmlspecialchars($campaign['campaign_img']); ?>"
+                                        class="img-thumbnail border shadow-sm" alt="Campaign Image"
+                                        style="max-width: 100px;">
                                 </td>
                                 <td>
                                     <a href="manage_advocacy_campaign.php?edit_campaign_id=<?php echo $campaign['campaign_id']; ?>"
-                                       class="btn btn-sm btn-info text-white me-2 shadow-sm">Edit</a>
+                                        class="btn btn-sm btn-info text-white me-2 shadow-sm">Edit</a>
                                     <a href="manage_advocacy_campaign.php?delete_campaign_id=<?php echo $campaign['campaign_id']; ?>"
-                                       class="btn btn-sm btn-danger shadow-sm"
-                                       onclick="return confirm('Are you sure you want to delete this campaign?');">Delete</a>
+                                        class="btn btn-sm btn-danger shadow-sm"
+                                        onclick="return confirm('Are you sure you want to delete this campaign?');">Delete</a>
                                     <a href="manage_campaign_content.php?campaign_id=<?php echo $campaign['campaign_id']; ?>"
-                                       class="btn btn-sm btn-success shadow-sm">Add Content</a>
+                                        class="btn btn-sm btn-success shadow-sm">Add Content</a>
                                 </td>
                             </tr>
                         <?php } ?>

@@ -19,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Verify the password
         if (password_verify($password, $row['password'])) {
             session_start();
-            // Correctly set the session variable for learner_id
             $_SESSION['learner_id'] = $row['learner_id'];
             header('Location: /GAD-1/Home.php');
             exit;
@@ -65,12 +64,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <input type="password" id="password" name="password" class="form-input" placeholder="Password"
                             required>
                     </div>
+                    <div class="error-message-container">
+                        <?php if (isset($error_message)): ?>
+                            <p class="error-message"><?= $error_message ?></p>
+                        <?php endif; ?>
+                    </div>
                     <div class="form-footer">
                         <a href="#" class="forgot-password">Forgot Password?</a>
                     </div>
-                    <?php if (isset($error_message)): ?>
-                        <p style="color: red;"><?= $error_message ?></p>
-                    <?php endif; ?>
                     <button type="submit" class="submit-btn">Login</button>
                 </form>
                 <p class="signup-text">
