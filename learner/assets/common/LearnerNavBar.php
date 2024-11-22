@@ -22,7 +22,7 @@ if (session_status() == PHP_SESSION_NONE) {
     <!-- Navigation Menu -->
     <ul class="user-nav-menu">
         <!-- Use absolute paths for menu links -->
-        <li><a href="/GAD-1/Home.php">Home</a></li>
+        <li><a href="/GAD-1/learner/Home.php">Home</a></li>
         <li><a href="/GAD-1/learner/AboutUs.php">About Us</a></li>
         <li><a href="/GAD-1/learner/Program.php">Program</a></li>
         <li><a href="/GAD-1/learner/AdvocacyCampaign.php">Advocacy Campaign</a></li>

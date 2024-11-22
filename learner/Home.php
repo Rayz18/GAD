@@ -7,7 +7,7 @@
     <title>Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../learner/assets/common/css/LearnerNavBar.css">
-    <link rel="stylesheet" href="../learner/assets/css/home.css">
+    <link rel="stylesheet" href="../learner/assets/css/Home.css">
 </head>
 
 <body class="bg-light">
@@ -51,7 +51,7 @@
             <div class="carousel-item active">
                 <div class="row gx-4">
                     <div class="col-md-4 d-flex align-items-stretch">
-                        <a href="http://localhost/GAD-1/learner/CourseContent.php?course_id=1#" class="card shadow h-100 text-decoration-none text-dark">
+                        <a href="http://localhost/GAD-1/learner/CourseContent.php?course_id=5#seminar-section" class="card shadow h-100 text-decoration-none text-dark">
                             <img src="https://placehold.co/300x180" class="card-img-top" alt="Training 1">
                             <div class="card-body">
                                 <h5 class="card-title">LARGA 2024: Gender-Responsive Activity</h5>
@@ -60,7 +60,7 @@
                         </a>
                     </div>
                     <div class="col-md-4 d-flex align-items-stretch">
-                        <a href="http://localhost/GAD-1/learner/CourseContent.php?course_id=2#" class="card shadow h-100 text-decoration-none text-dark">
+                        <a href="http://localhost/GAD-1/learner/CourseContent.php?course_id=2#seminar-section" class="card shadow h-100 text-decoration-none text-dark">
                             <img src="https://placehold.co/300x180" class="card-img-top" alt="Training 2">
                             <div class="card-body">
                                 <h5 class="card-title">2024 KAGAPAY Student Research Forum</h5>
@@ -69,7 +69,7 @@
                         </a>
                     </div>
                     <div class="col-md-4 d-flex align-items-stretch">
-                        <a href="http://localhost/GAD-1/learner/CourseContent.php?course_id=3#" class="card shadow h-100 text-decoration-none text-dark">
+                        <a href="http://localhost/GAD-1/learner/CourseContent.php?course_id=3#seminar-section" class="card shadow h-100 text-decoration-none text-dark">
                             <img src="https://placehold.co/300x180" class="card-img-top" alt="Training 3">
                             <div class="card-body">
                                 <h5 class="card-title">Benchmarking Activity with the UP Center for Women's and Gender Studies</h5>
@@ -83,7 +83,7 @@
             <div class="carousel-item">
                 <div class="row gx-4">
                     <div class="col-md-4 d-flex align-items-stretch">
-                        <a href="http://localhost/GAD-1/learner/CourseContent.php?course_id=4#" class="card shadow h-100 text-decoration-none text-dark">
+                        <a href="http://localhost/GAD-1/learner/CourseContent.php?course_id=4#seminar-section" class="card shadow h-100 text-decoration-none text-dark">
                             <img src="https://placehold.co/300x180" class="card-img-top" alt="Training 4">
                             <div class="card-body">
                                 <h5 class="card-title">Another Training</h5>
@@ -92,7 +92,7 @@
                         </a>
                     </div>
                     <div class="col-md-4 d-flex align-items-stretch">
-                        <a href="http://localhost/GAD-1/learner/CourseContent.php?course_id=5#" class="card shadow h-100 text-decoration-none text-dark">
+                        <a href="http://localhost/GAD-1/learner/CourseContent.php?course_id=5#seminar-section" class="card shadow h-100 text-decoration-none text-dark">
                             <img src="https://placehold.co/300x180" class="card-img-top" alt="Training 5">
                             <div class="card-body">
                                 <h5 class="card-title">Yet Another Training</h5>
@@ -101,7 +101,7 @@
                         </a>
                     </div>
                     <div class="col-md-4 d-flex align-items-stretch">
-                        <a href="http://localhost/GAD-1/learner/CourseContent.php?course_id=6#" class="card shadow h-100 text-decoration-none text-dark">
+                        <a href="http://localhost/GAD-1/learner/CourseContent.php?course_id=6#seminar-section" class="card shadow h-100 text-decoration-none text-dark">
                             <img src="https://placehold.co/300x180" class="card-img-top" alt="Training 6">
                             <div class="card-body">
                                 <h5 class="card-title">Training Example</h5>
@@ -122,7 +122,6 @@
         </button>
     </div>
 </section>
-
 
 
     <!-- Featured Course Offerings Section -->
@@ -186,7 +185,6 @@
         <button id="showLessBtn" class="btn btn-secondary mt-4 d-none" onclick="showLess()">Show Less</button>
     </div>
 </section>
-
 <script>
     // JavaScript to control row visibility
     function showMoreRow() {
