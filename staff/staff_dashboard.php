@@ -70,39 +70,40 @@ $programs_query = $conn->query($query);
     <main class="flex-grow-1 d-flex flex-column align-items-center justify-content-center bg-gray p-5">
         <h1 class="dashboard-heading">STAFF DASHBOARD - SUMMARY VIEW</h1>
 
-        <!-- Add Filter and Search Bar -->
-        <div class="container my-4">
-            <form method="GET" class="d-flex justify-content-between align-items-center mb-4">
-                <!-- Filter Dropdown -->
-                <div class="form-group">
-                    <label for="filter">Filter by:</label>
-                    <select name="filter" id="filter" class="form-control">
-                        <option value="">All</option>
-                        <option value="today" <?php echo (isset($_GET['filter']) && $_GET['filter'] === 'today') ? 'selected' : ''; ?>>Today</option>
-                        <option value="last7days" <?php echo (isset($_GET['filter']) && $_GET['filter'] === 'last7days') ? 'selected' : ''; ?>>Last 7 Days</option>
-                        <option value="last30days" <?php echo (isset($_GET['filter']) && $_GET['filter'] === 'last30days') ? 'selected' : ''; ?>>Last 30 Days</option>
-                        <option value="lastYear" <?php echo (isset($_GET['filter']) && $_GET['filter'] === 'lastYear') ? 'selected' : ''; ?>>Last Year</option>
-                    </select>
-                </div>
-
-                <!-- Search Bar -->
-                <div class="form-group ml-3">
-                    <label for="search">Search Programs:</label>
-                    <input type="text" name="search" id="search" class="form-control"
-                        value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>"
-                        placeholder="Enter program name">
-                </div>
-
-                <!-- Submit Button -->
-                <div class="form-group ml-3">
-                    <button type="submit" class="btn btn-primary mt-4">Apply</button>
-                </div>
-            </form>
-        </div>
-
         <!-- Programs Summary Section -->
         <div class="programs-summary mt-4 w-100">
-            <h2 class="text-light-purple">PROGRAMS OVERVIEW</h2>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <!-- Programs Overview Heading -->
+                <h2 class="text-light-purple mb-0">PROGRAMS OVERVIEW</h2>
+
+                <!-- Filter and Search Form -->
+                <form method="GET" class="d-flex align-items-center">
+                    <!-- Filter Dropdown -->
+                    <div class="form-group mb-0 mr-3">
+                        <label for="filter" class="sr-only">Filter by:</label>
+                        <select name="filter" id="filter" class="custom-form-control">
+                            <option value="">All</option>
+                            <option value="today" <?php echo (isset($_GET['filter']) && $_GET['filter'] === 'today') ? 'selected' : ''; ?>>Today</option>
+                            <option value="last7days" <?php echo (isset($_GET['filter']) && $_GET['filter'] === 'last7days') ? 'selected' : ''; ?>>Last 7 Days</option>
+                            <option value="last30days" <?php echo (isset($_GET['filter']) && $_GET['filter'] === 'last30days') ? 'selected' : ''; ?>>Last 30 Days</option>
+                            <option value="lastYear" <?php echo (isset($_GET['filter']) && $_GET['filter'] === 'lastYear') ? 'selected' : ''; ?>>Last Year</option>
+                        </select>
+                    </div>
+
+                    <!-- Search Bar -->
+                    <div class="form-group mb-0 mr-3">
+                        <label for="search" class="sr-only">Search Programs:</label>
+                        <input type="text" name="search" id="search" class="custom-form-control"
+                            value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>"
+                            placeholder="Enter program name">
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-group mb-0">
+                        <button type="submit" class="custom-button">Apply</button>
+                    </div>
+                </form>
+            </div>
 
             <div class="row mt-3">
                 <?php if ($programs_query->num_rows > 0): ?>
