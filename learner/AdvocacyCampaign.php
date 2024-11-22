@@ -32,15 +32,25 @@ $campaigns = $conn->query("SELECT * FROM advocacy_campaigns");
 
             <!-- Image Gallery Section -->
             <div class="image-gallery">
-                <?php while ($campaign = $campaigns->fetch_assoc()) { ?>
-                    <div class="image-card">
-                        <a href="AdvocacyCampaignRedirection.php?id=<?php echo $campaign['campaign_id']; ?>">
-                            <img src="<?php echo htmlspecialchars($campaign['campaign_img']); ?>"
-                                alt="<?php echo htmlspecialchars($campaign['campaign_name']); ?>">
-                        </a>
-                        <a class="image-title"><?php echo htmlspecialchars($campaign['campaign_name']); ?></a>
-                    </div>
-                <?php } ?>
+                <?php
+                // Check if campaigns exist
+                if ($campaigns->num_rows > 0) {
+                    while ($campaign = $campaigns->fetch_assoc()) {
+                        ?>
+                        <div class="image-card">
+                            <a href="AdvocacyCampaignRedirection.php?id=<?php echo $campaign['campaign_id']; ?>">
+                                <img src="<?php echo htmlspecialchars($campaign['campaign_img']); ?>"
+                                    alt="<?php echo htmlspecialchars($campaign['campaign_name']); ?>">
+                            </a>
+                            <a class="image-title"><?php echo htmlspecialchars($campaign['campaign_name']); ?></a>
+                        </div>
+                        <?php
+                    }
+                } else {
+                    // Display message if no campaigns are available
+                    echo "<p class='no-campaigns'>No advocacy campaigns available at the moment.</p>";
+                }
+                ?>
             </div>
         </div>
     </div>

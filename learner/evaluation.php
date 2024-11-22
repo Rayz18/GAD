@@ -19,6 +19,17 @@ if (!$course_id) {
     }
 }
 
+// Check if the learner has an attendance record for the seminar
+$attendance_check = $conn->prepare("SELECT * FROM attendance WHERE seminar_id = ? AND learner_id = ?");
+$attendance_check->bind_param("ii", $seminar_id, $learner_id);
+$attendance_check->execute();
+$has_attended = $attendance_check->get_result()->num_rows > 0;
+$attendance_check->close();
+
+if (!$has_attended) {
+    die("You must submit attendance for this seminar to access evaluation.");
+}
+
 $seminar_title = 'Seminar';
 $evaluation_instructions = '';
 

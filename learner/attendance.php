@@ -10,6 +10,17 @@ if (!$seminar_id || !$course_id) {
     die("Invalid seminar or course ID.");
 }
 
+// Check if the learner has registered for the seminar
+$registration_check = $conn->prepare("SELECT * FROM registrations WHERE seminar_id = ? AND learner_id = ?");
+$registration_check->bind_param("ii", $seminar_id, $learner_id);
+$registration_check->execute();
+$is_registered = $registration_check->get_result()->num_rows > 0;
+$registration_check->close();
+
+if (!$is_registered) {
+    die("You must register for this seminar to access attendance.");
+}
+
 $seminar_title = 'Seminar';
 $attendance_instructions = '';
 

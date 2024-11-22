@@ -22,7 +22,8 @@ require_once "../config.php";
                 <h1>PROGRAMS</h1>
                 <div class="search-container">
                     <form method="GET" action="program.php">
-                        <input type="text" placeholder="Search programs" name="search" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
+                        <input type="text" placeholder="Search" name="search"
+                            value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
                         <button type="submit">🔍</button>
                     </form>
                 </div>
