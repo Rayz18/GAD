@@ -293,3 +293,17 @@ body {
 .content.shifted {
     margin-left: 0; /* Adjust for collapsed sidebar */
 }
+
+.highlight-latest {
+    border-left: 4px solid #B19CD9; /* Add a highlighted border */
+    background-color: #f5f5f5; /* Slightly lighter background */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for emphasis */
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+}
+
+.highlight-latest:hover {
+    background-color: #e8e8e8; /* Slightly darker background on hover */
+    transform: translateY(-3px); /* Slight hover effect */
+}
+
