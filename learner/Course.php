@@ -4,13 +4,16 @@ require_once "../config.php";
 
 // Check if learner is logged in
 if (!isset($_SESSION['learner_id'])) {
+    // Redirect to login page if not logged in
     header('Location: login.php');
     exit;
 }
 
+// Get learner ID
+$learner_id = $_SESSION['learner_id'];
+
 // Get program_id from URL parameters
 $program_id = $_GET['program_id'];
-$learner_id = $_SESSION['learner_id'];
 
 // Fetch approved program details using the program_id
 $program_query = $conn->query("SELECT * FROM programs WHERE program_id = '$program_id' AND status = 'approved'");
@@ -18,6 +21,19 @@ $program = $program_query->fetch_assoc();
 
 if (!$program) {
     echo "Program not found or not approved.";
+    exit;
+}
+
+// Handle enroll/unenroll actions
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $course_id = $_POST['course_id'];
+    if (isset($_POST['enroll'])) {
+        $conn->query("INSERT INTO enrollments (learner_id, course_id) VALUES ('$learner_id', '$course_id')");
+    } elseif (isset($_POST['unenroll'])) {
+        $conn->query("DELETE FROM enrollments WHERE learner_id = '$learner_id' AND course_id = '$course_id'");
+    }
+    // Redirect to avoid form resubmission
+    header("Location: Course.php?program_id=$program_id");
     exit;
 }
 ?>
@@ -33,22 +49,25 @@ if (!$program) {
 </head>
 
 <body class="bg-light-gray">
-
     <?php include '../learner/assets/common/LearnerNavBar.php'; ?>
 
+    <!-- Title Section -->
     <div class="title-section">
         <h1><?php echo htmlspecialchars($program['program_name']); ?></h1>
     </div>
 
+    <!-- Courses Container -->
     <div class="courses-container">
         <?php
         // Fetch approved courses associated with the program_id
         $query = $conn->query("SELECT * FROM courses WHERE program_id = '$program_id' AND status = 'approved'");
 
+        // Loop through each course and display it
         if ($query->num_rows > 0) {
             while ($course = $query->fetch_assoc()) {
-                // Check enrollment status
-                $enrollment_query = $conn->query("SELECT * FROM enrollments WHERE course_id = '{$course['course_id']}' AND learner_id = '$learner_id'");
+                // Check if the learner is enrolled in the course
+                $course_id = $course['course_id'];
+                $enrollment_query = $conn->query("SELECT * FROM enrollments WHERE learner_id = '$learner_id' AND course_id = '$course_id'");
                 $is_enrolled = $enrollment_query->num_rows > 0;
                 ?>
                 <div class="course-card">
@@ -57,28 +76,19 @@ if (!$program) {
                             alt="<?php echo htmlspecialchars($course['course_name']); ?> Image">
                     </div>
                     <div class="course-description">
-                        <div class="course-header">
-                            <h2><?php echo htmlspecialchars($course['course_name']); ?></h2>
-                        </div>
-                        <p class="course-text"><?php echo htmlspecialchars($course['course_desc']); ?></p>
-                        <div class="view-course">
-                            <?php if ($is_enrolled) { ?>
-                                <a href="../learner/CourseContent.php?course_id=<?php echo $course['course_id']; ?>"
-                                    class="button">View Course</a>
-                            <?php } else { ?>
-                                <a href="#" class="button disabled">Enroll to View</a>
-                            <?php } ?>
-                        </div>
+                        <h2><?php echo htmlspecialchars($course['course_name']); ?></h2>
+                        <p><?php echo htmlspecialchars($course['course_desc']); ?></p>
                         <p class="course-date"><?php echo htmlspecialchars($course['course_date']); ?></p>
-                        <div class="enroll-actions">
-                            <?php if ($is_enrolled) { ?>
-                                <a href="../learner/unenroll.php?course_id=<?php echo $course['course_id']; ?>"
-                                    class="unenroll-link">Unenroll</a>
-                            <?php } else { ?>
-                                <a href="../learner/enroll.php?course_id=<?php echo $course['course_id']; ?>"
-                                    class="enroll-link">Enroll</a>
-                            <?php } ?>
-                        </div>
+                        <form method="POST" style="display: inline;">
+                            <input type="hidden" name="course_id" value="<?php echo $course_id; ?>">
+                            <?php if ($is_enrolled): ?>
+                                <button type="submit" name="unenroll" class="button unenroll">Unenroll</button>
+                                <a href="../learner/CourseContent.php?course_id=<?php echo $course_id; ?>"
+                                    class="button view-course">View Seminar</a>
+                            <?php else: ?>
+                                <button type="submit" name="enroll" class="button enroll">Enroll</button>
+                            <?php endif; ?>
+                        </form>
                     </div>
                 </div>
                 <?php
